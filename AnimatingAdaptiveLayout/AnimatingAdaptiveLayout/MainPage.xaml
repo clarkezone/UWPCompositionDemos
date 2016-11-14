@@ -1,0 +1,36 @@
+﻿<Page
+    x:Class="AnimatingAdaptiveLayout.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AnimatingAdaptiveLayout"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="0,100,0,0">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="stateone">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="300"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="one.(RelativePanel.LeftOf)" Value="two"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="statetwo">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="700"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="one.(RelativePanel.LeftOf)" Value="three"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+
+        </VisualStateManager.VisualStateGroups>
+        <Button x:Name="one" >One</Button>
+        <Button RelativePanel.AlignHorizontalCenterWithPanel="true" x:Name="two">Two</Button>
+        <Button x:Name="three" RelativePanel.AlignRightWithPanel="True">Three</Button>
+    </RelativePanel>
+</Page>
