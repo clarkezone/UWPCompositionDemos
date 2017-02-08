@@ -1,0 +1,77 @@
+﻿<Page
+    x:Class="MediaPlaybackViews.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MediaPlaybackViews"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" x:Name="foo">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="normal">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1024"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="spritepanel.(RelativePanel.AlignRightWithPanel)" Value="True"></Setter>
+                        <Setter Target="spritepanel.(RelativePanel.AlignVerticalCenterWithPanel)" Value="True"></Setter>
+                        <Setter Target="mpe.(RelativePanel.AlignVerticalCenterWithPanel)" Value="True"></Setter>
+                        <Setter Target="mpe.Margin" Value="15,0,0,0"></Setter>
+                        <Setter Target="spritepanel.Margin" Value="0,0,15,0"></Setter>
+                        <Setter Target="popbutton.(RelativePanel.AlignHorizontalCenterWithPanel)" Value="True"></Setter>
+                        <Setter Target="popbutton.(RelativePanel.AlignVerticalCenterWithPanel)" Value="True"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="compact">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="mpe.(RelativePanel.Below)" Value="toppanel"></Setter>
+                        <Setter Target="mpe.Margin" Value="0,15,0,0"></Setter>
+                        <Setter Target="spritepanel.Margin" Value="0,15,0,0"></Setter>
+                        <Setter Target="popbutton.Margin" Value="0,15,0,0"></Setter>
+                        <Setter Target="popbutton.(RelativePanel.AlignHorizontalCenterWithPanel)" Value="True"></Setter>
+                        <Setter Target="popbutton.(RelativePanel.Below)" Value="mpe"></Setter>
+                        <Setter Target="spritepanel.(RelativePanel.Below)" Value="popbutton"></Setter>
+                        <Setter Target="spritepanel.(RelativePanel.AlignHorizontalCenterWithPanel)" Value="True"></Setter>
+                        <Setter Target="mpe.(RelativePanel.AlignHorizontalCenterWithPanel)" Value="True"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <RelativePanel>
+            <StackPanel x:Name="toppanel" Margin="50,50,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"  Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center">URL:</TextBlock>
+                <TextBox Margin="5,0,0,0" x:Name="url" Width="400" Text="http://www.podtrac.com/pts/redirect.mp4/cdn.twit.tv/video/ww/ww0499/ww0499_h264m_864x480_500.mp4"></TextBox>
+                <Button Margin="5,0,0,0" Click="play_click">Play</Button>
+                <ProgressRing x:Name="buffering" Margin="5,0,0,0"  HorizontalAlignment="Right" VerticalAlignment="Top"></ProgressRing>
+            </StackPanel>
+            <Grid x:Name="mpe" Width="400" Height="300" Background="LightGray">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0">MediaPlayerElement</TextBlock>
+                <MediaPlayerElement x:Name="mediaPlayerElement" Grid.Row="1" AreTransportControlsEnabled="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></MediaPlayerElement>
+                <CheckBox Grid.Row="2" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked">Show Video</CheckBox>
+            </Grid>
+
+            <Button x:Name="popbutton" Height="100" Click="openpopupplayer_click" >Open Popup player</Button>
+
+            <Grid x:Name="spritepanel"  Width="400" Height="300" Background="LightGray" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0">SpriteVisual</TextBlock>
+                <Rectangle Grid.Row="1" x:Name="spritehost" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Rectangle>
+                <CheckBox Grid.Row="2" Checked="SpriteCheckBox_Checked" Unchecked="SpriteCheckBox_Unchecked">Show Video</CheckBox>
+            </Grid>
+        </RelativePanel>
+    </Grid>
+</Page>
