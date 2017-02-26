@@ -241,9 +241,13 @@ namespace HelloVirtualSurface
             //TODO: list of random image URI's
             var uri = new Uri("https://elroycdn.twit.tv/sites/default/files/styles/twit_album_art_144x144/public/images/shows/windows_weekly/album_art/audio/ww1400audio.jpg?itok=EGFfKhAc");
 
+            //Draw synchronously minus image.  Could fetch image from cache here
+            drawAction(null);
+
             //TODO handle the error case where the load fails
             CanvasBitmap.LoadAsync(CanvasDevice.GetSharedDevice(), uri, 96).AsTask().ContinueWith((bm) =>
             {
+                //redraw the tile once we have the image downloaded
                 drawAction(bm.Result);
             });
         }
