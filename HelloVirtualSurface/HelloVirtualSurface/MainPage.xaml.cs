@@ -53,6 +53,8 @@ namespace HelloVirtualSurface
 
         private TileDrawingManager visibleRegionManager;
 
+        private object sync = new object();
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -216,13 +218,34 @@ namespace HelloVirtualSurface
         public void DrawTile(Rect rect, int tileRow, int tileColumn)
         {
             Color randomColor = Color.FromArgb((byte)255, (byte)randonGen.Next(255), (byte)randonGen.Next(255), (byte)randonGen.Next(255));
-            using (var drawingSession = CanvasComposition.CreateDrawingSession(drawingSurface, rect))
-            {
-                drawingSession.Clear(randomColor);
 
-                CanvasTextFormat tf = new CanvasTextFormat() { FontSize = 72 };
-                drawingSession.DrawText($"{tileColumn},{tileRow}", new Vector2(50, 50), Colors.White, tf);
-            }
+
+            Action<CanvasBitmap> drawAction = (CanvasBitmap bitmap) =>
+            {
+                lock (sync)
+                {
+                    using (var drawingSession = CanvasComposition.CreateDrawingSession(drawingSurface, rect))
+                    {
+                        drawingSession.Clear(randomColor);
+                        if (bitmap != null)
+                        {
+                            drawingSession.DrawImage(bitmap);
+                        }
+
+                        CanvasTextFormat tf = new CanvasTextFormat() { FontSize = 72 };
+                        drawingSession.DrawText($"{tileColumn},{tileRow}", new Vector2(50, 50), Colors.White, tf);
+                    }
+                }
+            };
+
+            //TODO: list of random image URI's
+            var uri = new Uri("https://elroycdn.twit.tv/sites/default/files/styles/twit_album_art_144x144/public/images/shows/windows_weekly/album_art/audio/ww1400audio.jpg?itok=EGFfKhAc");
+
+            //TODO handle the error case where the load fails
+            CanvasBitmap.LoadAsync(CanvasDevice.GetSharedDevice(), uri, 96).AsTask().ContinueWith((bm) =>
+            {
+                drawAction(bm.Result);
+            });
         }
 
         public void Trim(Rect trimRect)
