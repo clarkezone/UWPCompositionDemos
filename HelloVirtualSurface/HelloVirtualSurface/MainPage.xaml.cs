@@ -147,6 +147,9 @@ namespace HelloVirtualSurface
             this.tracker.MinPosition = new System.Numerics.Vector3(0, 0, 0);
             //TODO: use same consts as tilemanager object
             this.tracker.MaxPosition = new System.Numerics.Vector3(TILESIZE * 10000, TILESIZE * 10000, 0);
+
+            this.tracker.MinScale = 0.01f;
+            this.tracker.MaxScale = 100.0f;
         }
 
         private void startAnimation(CompositionSurfaceBrush brush)
