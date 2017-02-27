@@ -50,6 +50,7 @@ namespace HelloVirtualSurface
         Random randonGen = new Random();
         private ExpressionAnimation moveSurfaceExpressionAnimation;
         private ExpressionAnimation moveSurfaceUpDownExpressionAnimation;
+        private ExpressionAnimation scaleSurfaceUpDownExpressionAnimation;
 
         private TileDrawingManager visibleRegionManager;
 
@@ -128,6 +129,9 @@ namespace HelloVirtualSurface
             this.interactionSource = VisualInteractionSource.Create(myDrawingVisual);
             this.interactionSource.PositionXSourceMode = InteractionSourceMode.EnabledWithInertia;
             this.interactionSource.PositionYSourceMode = InteractionSourceMode.EnabledWithInertia;
+
+            this.interactionSource.ScaleSourceMode = InteractionSourceMode.EnabledWithInertia;
+
             this.tracker = InteractionTracker.CreateWithOwner(this.compositor, this);
             this.tracker.InteractionSources.Add(this.interactionSource);
 
@@ -136,6 +140,9 @@ namespace HelloVirtualSurface
 
             this.moveSurfaceUpDownExpressionAnimation = this.compositor.CreateExpressionAnimation("-tracker.Position.Y");
             this.moveSurfaceUpDownExpressionAnimation.SetReferenceParameter("tracker", this.tracker);
+
+            this.scaleSurfaceUpDownExpressionAnimation = this.compositor.CreateExpressionAnimation("tracker.Scale");
+            this.scaleSurfaceUpDownExpressionAnimation.SetReferenceParameter("tracker", this.tracker);
 
             this.tracker.MinPosition = new System.Numerics.Vector3(0, 0, 0);
             //TODO: use same consts as tilemanager object
@@ -151,7 +158,10 @@ namespace HelloVirtualSurface
             animatingPropset.InsertScalar("ycoord", 1.0f);
             animatingPropset.StartAnimation("ycoord", moveSurfaceUpDownExpressionAnimation);
 
-            animateMatrix = compositor.CreateExpressionAnimation("Matrix3x2(1.0, 0.0, 0.0, 1.0, props.xcoord, props.ycoord)");
+            animatingPropset.InsertScalar("scale", 1.0f);
+            animatingPropset.StartAnimation("scale", scaleSurfaceUpDownExpressionAnimation);
+
+            animateMatrix = compositor.CreateExpressionAnimation("Matrix3x2(props.scale, 0.0, 0.0, props.scale, props.xcoord, props.ycoord)");
             animateMatrix.SetReferenceParameter("props", animatingPropset);
 
             brush.StartAnimation(nameof(brush.TransformMatrix), animateMatrix);
@@ -203,7 +213,7 @@ namespace HelloVirtualSurface
             try
             {
                 var diags = visibleRegionManager.UpdateVisibleRegion(sender.Position);
-                hud.Display = $"X:{sender.Position.X:00000.00} Y:{sender.Position.Y:00000.00} " + diags;
+                hud.Display = $"X:{sender.Position.X:00000.00} Y:{sender.Position.Y:00000.00} Scale:{sender.Scale}" + diags;
             }
             catch (Exception ex)
             {
