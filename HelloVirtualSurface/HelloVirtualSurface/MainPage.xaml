@@ -9,7 +9,7 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Name="maingrid">
         <Border HorizontalAlignment="Stretch" x:Name="virtualSurfaceHost" Margin="0,0,0,0"/>
-        <local:FastInfoDisplay x:Name="hud" VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="60"></local:FastInfoDisplay>
+        <local:FastInfoDisplay x:Name="hud" Margin="0,0,0,30" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="60"></local:FastInfoDisplay>
         <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal">
             <Button Click="moveUpClick" Foreground="White">Move Up</Button>
             <Button Click="moveDownClick" Foreground="White">Move Down</Button>

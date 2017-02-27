@@ -54,6 +54,9 @@ namespace HelloVirtualSurface
 
         private TileDrawingManager visibleRegionManager;
 
+        private float lastTrackerScale = 1f;
+        private bool zooming;
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -65,7 +68,7 @@ namespace HelloVirtualSurface
             ConfigureInput();
             Window.Current.CoreWindow.PointerPressed += CoreWindow_PointerPressed;
             virtualSurfaceHost.SizeChanged += TheSurface_SizeChanged;
-            this.hud.Display = "X:00000.00 Y:00000.00 Left tile:0 Top tile:0";
+            this.hud.Display = "X:00000.00 Y:00000.00 Scale:00000.00 Left tile:0 Top tile:0";
         }
 
         private void TheSurface_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -195,8 +198,15 @@ namespace HelloVirtualSurface
         {
         }
 
-        public void IdleStateEntered(InteractionTracker sender, InteractionTrackerIdleStateEnteredArgs args)
+        public async void IdleStateEntered(InteractionTracker sender, InteractionTrackerIdleStateEnteredArgs args)
         {
+            if (zooming)
+            {
+                MessageDialog md = new MessageDialog($"Zoom complete.  Final value:{lastTrackerScale}");
+                await md.ShowAsync();
+            }
+
+            zooming = false;
         }
 
         public void InertiaStateEntered(InteractionTracker sender, InteractionTrackerInertiaStateEnteredArgs args)
@@ -205,6 +215,7 @@ namespace HelloVirtualSurface
 
         public void InteractingStateEntered(InteractionTracker sender, InteractionTrackerInteractingStateEnteredArgs args)
         {
+            
         }
 
         public void RequestIgnored(InteractionTracker sender, InteractionTrackerRequestIgnoredArgs args)
@@ -215,8 +226,21 @@ namespace HelloVirtualSurface
         {
             try
             {
-                var diags = visibleRegionManager.UpdateVisibleRegion(sender.Position);
-                hud.Display = $"X:{sender.Position.X:00000.00} Y:{sender.Position.Y:00000.00} Scale:{sender.Scale}" + diags;
+                string diags = string.Empty;
+
+                if (lastTrackerScale == args.Scale)
+                {
+                    diags = visibleRegionManager.UpdateVisibleRegion(sender.Position);
+                } else
+                {
+                    // Don't run tilemanager during a zoom
+                    // TODO need custom logic here eg for zoom out
+                    zooming = true;
+                }
+
+                lastTrackerScale = args.Scale;
+
+                hud.Display = $"X:{sender.Position.X:00000.00} Y:{sender.Position.Y:00000.00} Scale:{sender.Scale:00000.00} " + diags;
             }
             catch (Exception ex)
             {
