@@ -21962,10 +21962,10 @@
   },
   "project": {
     "restore": {
-      "projectUniqueName": "c:\\users\\jeclarke\\documents\\visual studio 2017\\Projects\\HelloVirtualSurface\\TileManager\\TileManager.csproj",
+      "projectUniqueName": "C:\\Users\\jeclarke\\Source\\github.com\\clarkezone\\UWPCompositionDemos\\HelloVirtualSurface\\TileManager\\TileManager.csproj",
       "projectName": "TileManager",
-      "projectPath": "c:\\users\\jeclarke\\documents\\visual studio 2017\\Projects\\HelloVirtualSurface\\TileManager\\TileManager.csproj",
-      "projectJsonPath": "c:\\users\\jeclarke\\documents\\visual studio 2017\\Projects\\HelloVirtualSurface\\TileManager\\project.json",
+      "projectPath": "C:\\Users\\jeclarke\\Source\\github.com\\clarkezone\\UWPCompositionDemos\\HelloVirtualSurface\\TileManager\\TileManager.csproj",
+      "projectJsonPath": "C:\\Users\\jeclarke\\Source\\github.com\\clarkezone\\UWPCompositionDemos\\HelloVirtualSurface\\TileManager\\project.json",
       "projectStyle": "ProjectJson"
     },
     "dependencies": {

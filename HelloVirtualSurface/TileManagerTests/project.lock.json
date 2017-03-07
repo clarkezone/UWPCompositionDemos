@@ -22332,16 +22332,16 @@
   },
   "project": {
     "restore": {
-      "projectUniqueName": "c:\\users\\jeclarke\\documents\\visual studio 2017\\Projects\\HelloVirtualSurface\\TileManagerTests\\TileManagerTests.csproj",
+      "projectUniqueName": "C:\\Users\\jeclarke\\Source\\github.com\\clarkezone\\UWPCompositionDemos\\HelloVirtualSurface\\TileManagerTests\\TileManagerTests.csproj",
       "projectName": "TileManagerTests",
-      "projectPath": "c:\\users\\jeclarke\\documents\\visual studio 2017\\Projects\\HelloVirtualSurface\\TileManagerTests\\TileManagerTests.csproj",
-      "projectJsonPath": "c:\\users\\jeclarke\\documents\\visual studio 2017\\Projects\\HelloVirtualSurface\\TileManagerTests\\project.json",
+      "projectPath": "C:\\Users\\jeclarke\\Source\\github.com\\clarkezone\\UWPCompositionDemos\\HelloVirtualSurface\\TileManagerTests\\TileManagerTests.csproj",
+      "projectJsonPath": "C:\\Users\\jeclarke\\Source\\github.com\\clarkezone\\UWPCompositionDemos\\HelloVirtualSurface\\TileManagerTests\\project.json",
       "projectStyle": "ProjectJson",
       "frameworks": {
         "uap10.0": {
           "projectReferences": {
-            "c:\\users\\jeclarke\\documents\\visual studio 2017\\Projects\\HelloVirtualSurface\\TileManager\\TileManager.csproj": {
-              "projectPath": "c:\\users\\jeclarke\\documents\\visual studio 2017\\Projects\\HelloVirtualSurface\\TileManager\\TileManager.csproj"
+            "C:\\Users\\jeclarke\\Source\\github.com\\clarkezone\\UWPCompositionDemos\\HelloVirtualSurface\\TileManager\\TileManager.csproj": {
+              "projectPath": "C:\\Users\\jeclarke\\Source\\github.com\\clarkezone\\UWPCompositionDemos\\HelloVirtualSurface\\TileManager\\TileManager.csproj"
             }
           }
         }

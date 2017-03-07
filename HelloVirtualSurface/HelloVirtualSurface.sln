@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26201.1
+VisualStudioVersion = 15.0.26228.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloVirtualSurface", "HelloVirtualSurface\HelloVirtualSurface.csproj", "{ED0142EC-0A2B-4436-97A7-E6FDAD6D103B}"
 EndProject
@@ -22,6 +22,8 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{ED0142EC-0A2B-4436-97A7-E6FDAD6D103B}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{ED0142EC-0A2B-4436-97A7-E6FDAD6D103B}.Debug|Any CPU.Build.0 = Debug|x86
+		{ED0142EC-0A2B-4436-97A7-E6FDAD6D103B}.Debug|Any CPU.Deploy.0 = Debug|x86
 		{ED0142EC-0A2B-4436-97A7-E6FDAD6D103B}.Debug|ARM.ActiveCfg = Debug|ARM
 		{ED0142EC-0A2B-4436-97A7-E6FDAD6D103B}.Debug|ARM.Build.0 = Debug|ARM
 		{ED0142EC-0A2B-4436-97A7-E6FDAD6D103B}.Debug|ARM.Deploy.0 = Debug|ARM
@@ -42,6 +44,8 @@ Global
 		{ED0142EC-0A2B-4436-97A7-E6FDAD6D103B}.Release|x86.Build.0 = Release|x86
 		{ED0142EC-0A2B-4436-97A7-E6FDAD6D103B}.Release|x86.Deploy.0 = Release|x86
 		{361882E2-C224-40E8-A60A-85F9065613DD}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{361882E2-C224-40E8-A60A-85F9065613DD}.Debug|Any CPU.Build.0 = Debug|x86
+		{361882E2-C224-40E8-A60A-85F9065613DD}.Debug|Any CPU.Deploy.0 = Debug|x86
 		{361882E2-C224-40E8-A60A-85F9065613DD}.Debug|ARM.ActiveCfg = Debug|ARM
 		{361882E2-C224-40E8-A60A-85F9065613DD}.Debug|ARM.Build.0 = Debug|ARM
 		{361882E2-C224-40E8-A60A-85F9065613DD}.Debug|ARM.Deploy.0 = Debug|ARM
