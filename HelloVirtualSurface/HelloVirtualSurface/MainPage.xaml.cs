@@ -111,20 +111,22 @@ namespace HelloVirtualSurface
 
         public void ConfigureSpriteVisual()
         {
-            var l = new Windows.Graphics.SizeInt32();
-            l.Height = TILESIZE * 10000;
-            l.Width = TILESIZE * 10000;
+            var size = new Windows.Graphics.SizeInt32();
+            size.Height = TILESIZE * 10000;
+            size.Width = TILESIZE * 10000;
 
-            drawingSurface = comositionGraphicsDevice.CreateVirtualDrawingSurface(l, DirectXPixelFormat.B8G8R8A8UIntNormalized, DirectXAlphaMode.Premultiplied);
+            this.drawingSurface = comositionGraphicsDevice.CreateVirtualDrawingSurface(size, 
+                DirectXPixelFormat.B8G8R8A8UIntNormalized, 
+                DirectXAlphaMode.Premultiplied);
 
-            surfaceBrush = compositor.CreateSurfaceBrush(drawingSurface);
-            surfaceBrush.Stretch = CompositionStretch.None;
-            surfaceBrush.HorizontalAlignmentRatio = 0;
-            surfaceBrush.VerticalAlignmentRatio = 0;
-            surfaceBrush.TransformMatrix = System.Numerics.Matrix3x2.CreateTranslation(20.0f, 20.0f);
+            this.surfaceBrush = compositor.CreateSurfaceBrush(drawingSurface);
+            this.surfaceBrush.Stretch = CompositionStretch.None;
+            this.surfaceBrush.HorizontalAlignmentRatio = 0;
+            this.surfaceBrush.VerticalAlignmentRatio = 0;
+            this.surfaceBrush.TransformMatrix = System.Numerics.Matrix3x2.CreateTranslation(20.0f, 20.0f);
 
-            myDrawingVisual.Brush = surfaceBrush;
-            surfaceBrush.Offset = new System.Numerics.Vector2(0, 0);
+            this.myDrawingVisual.Brush = surfaceBrush;
+            this.surfaceBrush.Offset = new System.Numerics.Vector2(0, 0);
         }
 
         public void ConfigureInteraction()
