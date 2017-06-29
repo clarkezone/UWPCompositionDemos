@@ -22328,20 +22328,20 @@
     "UAP,Version=v10.0": []
   },
   "packageFolders": {
-    "C:\\Users\\jeclarke\\.nuget\\packages\\": {}
+    "C:\\Users\\james\\.nuget\\packages\\": {}
   },
   "project": {
     "restore": {
-      "projectUniqueName": "C:\\Users\\jeclarke\\Source\\github.com\\clarkezone\\UWPCompositionDemos\\HelloVirtualSurface\\TileManagerTests\\TileManagerTests.csproj",
+      "projectUniqueName": "C:\\Users\\james\\Source\\github.com\\clarkezone\\UWPCompositionDemos\\HelloVirtualSurface\\TileManagerTests\\TileManagerTests.csproj",
       "projectName": "TileManagerTests",
-      "projectPath": "C:\\Users\\jeclarke\\Source\\github.com\\clarkezone\\UWPCompositionDemos\\HelloVirtualSurface\\TileManagerTests\\TileManagerTests.csproj",
-      "projectJsonPath": "C:\\Users\\jeclarke\\Source\\github.com\\clarkezone\\UWPCompositionDemos\\HelloVirtualSurface\\TileManagerTests\\project.json",
+      "projectPath": "C:\\Users\\james\\Source\\github.com\\clarkezone\\UWPCompositionDemos\\HelloVirtualSurface\\TileManagerTests\\TileManagerTests.csproj",
+      "projectJsonPath": "C:\\Users\\james\\Source\\github.com\\clarkezone\\UWPCompositionDemos\\HelloVirtualSurface\\TileManagerTests\\project.json",
       "projectStyle": "ProjectJson",
       "frameworks": {
         "uap10.0": {
           "projectReferences": {
-            "C:\\Users\\jeclarke\\Source\\github.com\\clarkezone\\UWPCompositionDemos\\HelloVirtualSurface\\TileManager\\TileManager.csproj": {
-              "projectPath": "C:\\Users\\jeclarke\\Source\\github.com\\clarkezone\\UWPCompositionDemos\\HelloVirtualSurface\\TileManager\\TileManager.csproj"
+            "C:\\Users\\james\\Source\\github.com\\clarkezone\\UWPCompositionDemos\\HelloVirtualSurface\\TileManager\\TileManager.csproj": {
+              "projectPath": "C:\\Users\\james\\Source\\github.com\\clarkezone\\UWPCompositionDemos\\HelloVirtualSurface\\TileManager\\TileManager.csproj"
             }
           }
         }
