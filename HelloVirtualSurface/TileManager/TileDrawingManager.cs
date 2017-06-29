@@ -7,7 +7,7 @@ namespace TileManager
     public class TileDrawingManager
     {
         private const int TILESIZE = 250;
-        private const int DRAWAHEAD = 5; //Up to this many extra tiles will be drawn on each edge outside the viewport
+        //private int DRAWAHEAD = 0; //Up to this many extra tiles will be drawn on each edge outside the viewport
         internal int currentTopLeftTileRow = 0;
         internal int currentTopLeftTileColumn = 0;
 
@@ -20,6 +20,8 @@ namespace TileManager
         Vector3 currentPosition;
         ITileRenderer currentRenderer;
 
+        public int DrawAheadTileCount { get; set; }
+
         public TileDrawingManager(ITileRenderer renderer)
         {
             this.currentRenderer = renderer;
@@ -30,10 +32,10 @@ namespace TileManager
             this.currentPosition = currentPosition;
             bool stateUpdate = false;
             
-            int requiredTopTileRow = Math.Max((int)currentPosition.Y / TILESIZE - DRAWAHEAD, 0);
-            int requiredBottomTileRow = (int)(currentPosition.Y + viewPortSize.Height) / TILESIZE + DRAWAHEAD;
-            int requiredLeftTileColumn = Math.Max((int)currentPosition.X / TILESIZE - DRAWAHEAD, 0);
-            int requiredRightTileColumn = (int)(currentPosition.X + viewPortSize.Width) / TILESIZE + DRAWAHEAD;
+            int requiredTopTileRow = Math.Max((int)currentPosition.Y / TILESIZE - DrawAheadTileCount, 0);
+            int requiredBottomTileRow = (int)(currentPosition.Y + viewPortSize.Height) / TILESIZE + DrawAheadTileCount;
+            int requiredLeftTileColumn = Math.Max((int)currentPosition.X / TILESIZE - DrawAheadTileCount, 0);
+            int requiredRightTileColumn = (int)(currentPosition.X + viewPortSize.Width) / TILESIZE + DrawAheadTileCount;
 
             currentTopLeftTileRow = (int)currentPosition.Y / TILESIZE;
             currentTopLeftTileColumn = (int)currentPosition.X / TILESIZE;
@@ -125,15 +127,15 @@ namespace TileManager
         private void DrawVisibleTiles()
         {
             //TODO: drawahead applied to left as well
-            for (int row = 0; row < verticalVisibleTileCount + DRAWAHEAD; row++)
+            for (int row = 0; row < verticalVisibleTileCount + DrawAheadTileCount; row++)
             {
-                for (int column = 0; column < horizontalVisibleTileCount + DRAWAHEAD; column++)
+                for (int column = 0; column < horizontalVisibleTileCount + DrawAheadTileCount; column++)
                 {
                     DrawTile(row, column);
                 }
             }
-            this.drawnRightTileColumn = horizontalVisibleTileCount -1 + DRAWAHEAD;
-            this.drawnBottomTileRow = verticalVisibleTileCount -1 + DRAWAHEAD;
+            this.drawnRightTileColumn = horizontalVisibleTileCount -1 + DrawAheadTileCount;
+            this.drawnBottomTileRow = verticalVisibleTileCount -1 + DrawAheadTileCount;
         }
 
         private void DrawTile(int row, int column)

@@ -272,10 +272,16 @@ namespace HelloVirtualSurface
 
         private async void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            MessageDialog md = new MessageDialog("Drawahead not yet implemented");
-            await md.ShowAsync();
-
-            ((CheckBox)sender).IsChecked = false;
+            if (((CheckBox)sender).IsChecked.Value) {
+                visibleRegionManager.DrawAheadTileCount = 5;
+                MessageDialog md = new MessageDialog("Drawahead enabled");
+                await md.ShowAsync();
+            } else
+            {
+                visibleRegionManager.DrawAheadTileCount = 0;
+                MessageDialog md = new MessageDialog("Drawahead disabled");
+                await md.ShowAsync();
+            }
         }
     }
 }
