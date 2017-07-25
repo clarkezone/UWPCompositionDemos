@@ -75,7 +75,7 @@ namespace HelloVirtualSurface
         {
             visibleRegionManager.UpdateViewportSize(e.NewSize);
 
-            myDrawingVisual.SetSize(virtualSurfaceHost);
+            myDrawingVisual.SetSize(this);
         }
 
         private void CoreWindow_PointerPressed(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.PointerEventArgs args)
