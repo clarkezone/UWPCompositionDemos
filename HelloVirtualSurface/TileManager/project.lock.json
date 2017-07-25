@@ -21958,14 +21958,14 @@
     "UAP,Version=v10.0": []
   },
   "packageFolders": {
-    "C:\\Users\\james\\.nuget\\packages\\": {}
+    "C:\\Users\\jeclarke\\.nuget\\packages\\": {}
   },
   "project": {
     "restore": {
-      "projectUniqueName": "C:\\Users\\james\\Source\\github.com\\clarkezone\\UWPCompositionDemos\\HelloVirtualSurface\\TileManager\\TileManager.csproj",
+      "projectUniqueName": "C:\\Users\\jeclarke\\source\\github.com\\UWPCompositionDemos\\HelloVirtualSurface\\TileManager\\TileManager.csproj",
       "projectName": "TileManager",
-      "projectPath": "C:\\Users\\james\\Source\\github.com\\clarkezone\\UWPCompositionDemos\\HelloVirtualSurface\\TileManager\\TileManager.csproj",
-      "projectJsonPath": "C:\\Users\\james\\Source\\github.com\\clarkezone\\UWPCompositionDemos\\HelloVirtualSurface\\TileManager\\project.json",
+      "projectPath": "C:\\Users\\jeclarke\\source\\github.com\\UWPCompositionDemos\\HelloVirtualSurface\\TileManager\\TileManager.csproj",
+      "projectJsonPath": "C:\\Users\\jeclarke\\source\\github.com\\UWPCompositionDemos\\HelloVirtualSurface\\TileManager\\project.json",
       "projectStyle": "ProjectJson"
     },
     "dependencies": {

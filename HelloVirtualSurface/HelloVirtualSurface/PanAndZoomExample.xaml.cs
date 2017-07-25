@@ -29,7 +29,7 @@ namespace HelloVirtualSurface
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page, IInteractionTrackerOwner, ITileRenderer
+    public sealed partial class PanZoomExample : Page, IInteractionTrackerOwner, ITileRenderer
     {
         private Compositor compositor;
         private CanvasDevice win2dDevice;
@@ -57,7 +57,7 @@ namespace HelloVirtualSurface
         private float lastTrackerScale = 1f;
         private bool zooming;
 
-        public MainPage()
+        public PanZoomExample()
         {
             this.InitializeComponent();
             InitializeComposition();
@@ -67,11 +67,11 @@ namespace HelloVirtualSurface
             startAnimation(surfaceBrush);
             ConfigureInput();
             Window.Current.CoreWindow.PointerPressed += CoreWindow_PointerPressed;
-            virtualSurfaceHost.SizeChanged += TheSurface_SizeChanged;
+            virtualSurfaceHost.SizeChanged += SurfaceHost_SizeChanged;
             this.hud.Display = "X:00000.00 Y:00000.00 Scale:00000.00 Left tile:0 Top tile:0";
         }
 
-        private void TheSurface_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void SurfaceHost_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             visibleRegionManager.UpdateViewportSize(e.NewSize);
 
