@@ -27,23 +27,42 @@ namespace SpringyShowHide
         public MainPage()
         {
             this.InitializeComponent();
-            AddShowHide();
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             githubimage.Visibility = (githubimage.Visibility == Visibility.Collapsed ? githubimage.Visibility = Visibility.Visible : githubimage.Visibility = Visibility.Collapsed);
         }
 
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            AddShowHide();
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            RemoveShowHide();
+        }
+
         private void AddShowHide()
+        {
+            ElementCompositionPreview.SetIsTranslationEnabled(githubimage, true);
+            ElementCompositionPreview.SetImplicitShowAnimation(githubimage, CreateSpringAnimation());
+            ElementCompositionPreview.SetImplicitHideAnimation(githubimage, CreateOpacityAnimation(0.4, 0));
+        }
+        private void RemoveShowHide()
+        {
+            ElementCompositionPreview.SetImplicitShowAnimation(githubimage, null);
+            ElementCompositionPreview.SetImplicitHideAnimation(githubimage, null);
+        }
+
+        private static ICompositionAnimationBase CreateSpringAnimation()
         {
             var springAnimation = Window.Current.Compositor.CreateSpringScalarAnimation();
             springAnimation.InitialVelocity = 1000.0f;
             springAnimation.DampingRatio = 0.3f;
             springAnimation.Target = "Translation.Y";
             springAnimation.Period = TimeSpan.FromSeconds(0.2);
-            ElementCompositionPreview.SetIsTranslationEnabled(githubimage, true);
-            ElementCompositionPreview.SetImplicitShowAnimation(githubimage, springAnimation);
-            ElementCompositionPreview.SetImplicitHideAnimation(githubimage, CreateOpacityAnimation(0.4, 0));
+            return springAnimation;
         }
 
         internal static ICompositionAnimationBase CreateOpacityAnimation(double seconds, float finalvalue)
@@ -55,5 +74,6 @@ namespace SpringyShowHide
             return animation;
         }
 
+        
     }
 }

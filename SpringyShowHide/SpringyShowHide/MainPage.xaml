@@ -9,6 +9,9 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Image x:Name="githubimage" Source="Assets/github.svg" Width="300" Height="300" Visibility="Collapsed"></Image>
-        <Button Click="Button_Click">Toggle Show / Hide</Button>
+        <StackPanel VerticalAlignment="Center" Margin="10,0,0,0">
+        <Button Click="Button_Click">Toggle image visbility property</Button>
+        <CheckBox Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Width="200">Use spring animation for show hide via implicit animations</CheckBox>
+        </StackPanel>
     </Grid>
 </Page>
