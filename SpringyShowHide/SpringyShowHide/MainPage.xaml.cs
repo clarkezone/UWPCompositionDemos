@@ -27,6 +27,7 @@ namespace SpringyShowHide
         public MainPage()
         {
             this.InitializeComponent();
+            AddShowHide();
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
