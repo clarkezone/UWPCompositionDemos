@@ -38,6 +38,7 @@ namespace HelloVectors
 
         private void SimpleShapeImperative_Click(object sender, RoutedEventArgs e)
         {
+            
             compositor = Window.Current.Compositor;
             Windows.UI.Composition.ShapeVisual shape = compositor.CreateShapeVisual();
             ElementCompositionPreview.SetElementChildVisual(VectorHost, shape);

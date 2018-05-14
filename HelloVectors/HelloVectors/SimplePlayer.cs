@@ -16,7 +16,7 @@ namespace HelloVectors
     }
     class SimplePlayer<T> where T : AnimationTarget, new()
     {
-        T dc;
+        T targetAnimation;
         ScalarKeyFrameAnimation playAnimation;
         Compositor _compositor;
         private Visual v;
@@ -28,8 +28,8 @@ namespace HelloVectors
         public SimplePlayer(Compositor c)
         {
             _compositor = c;
-            dc = new T();
-            dc.CreateInstance(_compositor, out v, out size, out set, out name, out duration);
+            targetAnimation = new T();
+            targetAnimation.CreateInstance(_compositor, out v, out size, out set, out name, out duration);
         }
 
         public Visual Visual
