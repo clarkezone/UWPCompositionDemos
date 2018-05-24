@@ -103,10 +103,11 @@ namespace HelloVectors
             //Animation Class generated with TODO:
 
             compositor = Window.Current.Compositor;
-            Windows.UI.Composition.ShapeVisual shape = compositor.CreateShapeVisual();
+            //Windows.UI.Composition.ShapeVisual shape = compositor.CreateShapeVisual();
 
 
-            SimplePlayer<HappyBirthdayComposition> player = new SimplePlayer<HappyBirthdayComposition>(Window.Current.Compositor);
+            //SimplePlayer<HappyBirthdayComposition> player = new SimplePlayer<HappyBirthdayComposition>(Window.Current.Compositor);
+            SimplePlayer<SimpleMorphComposition> player = new SimplePlayer<SimpleMorphComposition>(Window.Current.Compositor);
 
             ElementCompositionPreview.SetElementChildVisual(VectorHost, player.Visual);
 
