@@ -93,21 +93,72 @@ namespace HelloVectors
 
         private void PathMorphImperative_Click(object sender, RoutedEventArgs e)
         {
+            compositor = Window.Current.Compositor;
+            Windows.UI.Composition.ShapeVisual shape = compositor.CreateShapeVisual();
+            ElementCompositionPreview.SetElementChildVisual(VectorHost, shape);
+            shape.Size = new System.Numerics.Vector2((float)VectorHost.Width, (float)VectorHost.Height);
 
+            CanvasGeometry square = BuildSquareGeometry();
+            CompositionPath squarePath = new CompositionPath(square);
+
+            CanvasGeometry circle = BuildCircleGeometry();
+            CompositionPath circlePath = new CompositionPath(circle);
+
+            CompositionPathGeometry compositionPathGeometry = compositor.CreatePathGeometry(squarePath);
+            CompositionSpriteShape spriteShape = compositor.CreateSpriteShape(compositionPathGeometry);
+            spriteShape.Offset = new Vector2(150, 200);
+            spriteShape.FillBrush = CreateGradientBrush();
+
+            var playAnimation = compositor.CreatePathKeyFrameAnimation();
+            playAnimation.Duration = TimeSpan.FromSeconds(4);
+            playAnimation.InsertKeyFrame(0, squarePath);
+            playAnimation.InsertKeyFrame(0.3F, circlePath);
+            playAnimation.InsertKeyFrame(0.6F, circlePath);
+            playAnimation.InsertKeyFrame(1.0F, squarePath);
+            playAnimation.IterationBehavior = AnimationIterationBehavior.Forever;
+            playAnimation.Direction = Windows.UI.Composition.AnimationDirection.Alternate;
+            compositionPathGeometry.StartAnimation("Path", playAnimation);
+
+            shape.Shapes.Add(spriteShape);
+        }
+
+        CanvasGeometry BuildSquareGeometry()
+        {
+            using (var builder = new CanvasPathBuilder(null))
+            {
+                builder.SetFilledRegionDetermination(CanvasFilledRegionDetermination.Winding);
+                builder.BeginFigure(new Vector2(-90, -146));
+                builder.AddCubicBezier(new Vector2(-90, -146), new Vector2(176, -148.555F), new Vector2(176, -148.555F));
+                builder.AddCubicBezier(new Vector2(176, -148.555F), new Vector2(174.445F, 121.445F), new Vector2(174.445F, 121.445F));
+                builder.AddCubicBezier(new Vector2(174.445F, 121.445F), new Vector2(-91.555F, 120), new Vector2(-91.555F, 120));
+                builder.AddCubicBezier(new Vector2(-91.555F, 120), new Vector2(-90, -146), new Vector2(-90, -146));
+                builder.EndFigure(CanvasFigureLoop.Closed);
+                return CanvasGeometry.CreatePath(builder);
+            }
+        }
+
+        CanvasGeometry BuildCircleGeometry()
+        {
+            using (var builder = new CanvasPathBuilder(null))
+            {
+                builder.SetFilledRegionDetermination(CanvasFilledRegionDetermination.Winding);
+                builder.BeginFigure(new Vector2(42.223F, -146));
+                builder.AddCubicBezier(new Vector2(115.248F, -146), new Vector2(174.445F, -86.13F), new Vector2(174.445F, -12.277F));
+                builder.AddCubicBezier(new Vector2(174.445F, 61.576F), new Vector2(115.248F, 121.445F), new Vector2(42.223F, 121.445F));
+                builder.AddCubicBezier(new Vector2(-30.802F, 121.445F), new Vector2(-90, 61.576F), new Vector2(-90, -12.277F));
+                builder.AddCubicBezier(new Vector2(-90, -86.13F), new Vector2(-30.802F, -146), new Vector2(42.223F, -146));
+                builder.EndFigure(CanvasFigureLoop.Closed);
+                return CanvasGeometry.CreatePath(builder);
+            }
         }
 
         private void BodyMovinImperative_Click(object sender, RoutedEventArgs e)
         {
             //https://www.lottiefiles.com/427-happy-birthday
 
-            //Animation Class generated with TODO:
-
             compositor = Window.Current.Compositor;
-            //Windows.UI.Composition.ShapeVisual shape = compositor.CreateShapeVisual();
 
-
-            //SimplePlayer<HappyBirthdayComposition> player = new SimplePlayer<HappyBirthdayComposition>(Window.Current.Compositor);
-            SimplePlayer<SimpleMorphComposition> player = new SimplePlayer<SimpleMorphComposition>(Window.Current.Compositor);
+            SimplePlayer<HappyBirthday> player = new SimplePlayer<HappyBirthday>(Window.Current.Compositor);
 
             ElementCompositionPreview.SetElementChildVisual(VectorHost, player.Visual);
 

@@ -6,13 +6,21 @@ namespace HelloVectors
 {
     interface AnimationTarget
     {
-        void CreateInstance(
-           Compositor compositor,
-           out Visual rootVisual,
-           out Vector2 size,
-           out CompositionPropertySet progressPropertySet,
-           out string progressPropertyName,
-           out TimeSpan duration);
+        //void CreateInstance(
+        //   Compositor compositor,
+        //   out Visual rootVisual,
+        //   out Vector2 size,
+        //   out CompositionPropertySet progressPropertySet,
+        //   out string progressPropertyName,
+        //   out TimeSpan duration);
+
+        bool TryCreateInstance(
+          Compositor compositor,
+          out Visual rootVisual,
+          out Vector2 size,
+          out CompositionPropertySet progressPropertySet,
+          out TimeSpan duration,
+          out object diagnostics);
     }
     class SimplePlayer<T> where T : AnimationTarget, new()
     {
@@ -20,16 +28,16 @@ namespace HelloVectors
         ScalarKeyFrameAnimation playAnimation;
         Compositor _compositor;
         private Visual v;
-        private string name;
         private Vector2 size;
         CompositionPropertySet set;
         TimeSpan duration;
+        object diagnostics;
 
         public SimplePlayer(Compositor c)
         {
             _compositor = c;
             targetAnimation = new T();
-            targetAnimation.CreateInstance(_compositor, out v, out size, out set, out name, out duration);
+            targetAnimation.TryCreateInstance(_compositor, out v, out size, out set, out duration, out diagnostics);
         }
 
         public Visual Visual
@@ -57,7 +65,7 @@ namespace HelloVectors
             var linearEasing = _compositor.CreateLinearEasingFunction();
             playAnimation.InsertKeyFrame(0, 0, linearEasing);
             playAnimation.InsertKeyFrame(1, 1, linearEasing);
-            set.StartAnimation(name, playAnimation);
+            set.StartAnimation("Progress", playAnimation);
         }
     }
 }
