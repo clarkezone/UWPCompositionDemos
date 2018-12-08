@@ -23,3 +23,5 @@
 #include "winrt/Windows.UI.Xaml.Shapes.h"
 #include "Generated Files/winrt/Microsoft.Graphics.Canvas.h"
 #include "Generated Files/winrt/Microsoft.Graphics.Canvas.Geometry.h"
+#include "Generated Files/winrt/Microsoft.UI.Xaml.Controls.h"
+#include "Generated Files/winrt/Microsoft.UI.Xaml.XamlTypeInfo.h"
