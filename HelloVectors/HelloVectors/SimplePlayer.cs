@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.UI.Xaml.Controls;
+using System;
 using System.Numerics;
 using Windows.UI.Composition;
 
@@ -6,66 +7,48 @@ namespace HelloVectors
 {
     interface AnimationTarget
     {
-        //void CreateInstance(
-        //   Compositor compositor,
-        //   out Visual rootVisual,
-        //   out Vector2 size,
-        //   out CompositionPropertySet progressPropertySet,
-        //   out string progressPropertyName,
-        //   out TimeSpan duration);
-
         bool TryCreateInstance(
           Compositor compositor,
-          out Visual rootVisual,
-          out Vector2 size,
-          out CompositionPropertySet progressPropertySet,
-          out TimeSpan duration,
           out object diagnostics);
     }
-    class SimplePlayer<T> where T : AnimationTarget, new()
+    class SimplePlayer<T> where T : IAnimatedVisualSource, new()
     {
         T targetAnimation;
-        ScalarKeyFrameAnimation playAnimation;
+        ScalarKeyFrameAnimation _playAnimation;
         Compositor _compositor;
-        private Visual v;
-        private Vector2 size;
-        CompositionPropertySet set;
-        TimeSpan duration;
+        private IAnimatedVisual _animatedVisual;
         object diagnostics;
 
         public SimplePlayer(Compositor c)
         {
             _compositor = c;
             targetAnimation = new T();
-            targetAnimation.TryCreateInstance(_compositor, out v, out size, out set, out duration, out diagnostics);
+            _animatedVisual = targetAnimation.TryCreateAnimatedVisual(_compositor, out diagnostics);
         }
 
-        public Visual Visual
+        public IAnimatedVisual AnimatedVisual
         {
             get
             {
-                return v;
-            }
-        }
-
-        public Vector2 Size
-        {
-            get
-            {
-                return size;
+                return _animatedVisual;
             }
         }
 
         public void Play()
         {
-            playAnimation = _compositor.CreateScalarKeyFrameAnimation();
-            playAnimation.Duration = TimeSpan.FromSeconds(2);
-            playAnimation.IterationBehavior = AnimationIterationBehavior.Forever;
-            playAnimation.Direction = Windows.UI.Composition.AnimationDirection.Alternate;
+            _playAnimation = _compositor.CreateScalarKeyFrameAnimation();
+            _playAnimation.Duration = TimeSpan.FromSeconds(2);
+            _playAnimation.IterationBehavior = AnimationIterationBehavior.Forever;
+            _playAnimation.Direction = Windows.UI.Composition.AnimationDirection.Alternate;
             var linearEasing = _compositor.CreateLinearEasingFunction();
-            playAnimation.InsertKeyFrame(0, 0, linearEasing);
-            playAnimation.InsertKeyFrame(1, 1, linearEasing);
-            set.StartAnimation("Progress", playAnimation);
+            _playAnimation.InsertKeyFrame(0, 0, linearEasing);
+            _playAnimation.InsertKeyFrame(1, 1, linearEasing);
+            _animatedVisual.RootVisual.Properties.StartAnimation("Progress", _playAnimation);
+        }
+
+        internal void SetSize(double width, double height)
+        {
+            _animatedVisual.RootVisual.Scale = new Vector3((float)width / _animatedVisual.Size.X, (float)height / _animatedVisual.Size.Y, 1.0f);
         }
     }
 }

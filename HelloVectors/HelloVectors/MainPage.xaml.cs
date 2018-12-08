@@ -1,13 +1,16 @@
-﻿using Compositions;
+﻿using AnimatedVisuals;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using System;
+using System.Diagnostics;
 using System.Numerics;
 using Windows.UI;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Hosting;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Shapes;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -35,10 +38,9 @@ namespace HelloVectors
             Windows.UI.Composition.ShapeVisual shape = compositor.CreateShapeVisual();
 
             // set this as a child of our host shape from XAML
-            ElementCompositionPreview.SetElementChildVisual(VectorHost, shape);
+            SetVisualOnElement(shape);
 
-            // set the size of the shape to match it's XAML host [note for completeness, listen to size change events]
-            shape.Size = new System.Numerics.Vector2((float)VectorHost.Width, (float)VectorHost.Height);
+            
 
             // Create a circle geometry and set it's radius
             var circleGeometry = compositor.CreateEllipseGeometry();
@@ -60,8 +62,7 @@ namespace HelloVectors
             // Same steps as for SimpleShapeImperative_Click to create, size and host a ShapeVisual
             compositor = Window.Current.Compositor;
             Windows.UI.Composition.ShapeVisual shape = compositor.CreateShapeVisual();
-            ElementCompositionPreview.SetElementChildVisual(VectorHost, shape);
-            shape.Size = new System.Numerics.Vector2((float)VectorHost.Width, (float)VectorHost.Height);
+            SetVisualOnElement(shape);
 
             // use Win2D's CanvasPathBuilder to create a simple path
             CanvasPathBuilder pathBuilder = new CanvasPathBuilder(CanvasDevice.GetSharedDevice());
@@ -103,8 +104,7 @@ namespace HelloVectors
             // Same steps as for SimpleShapeImperative_Click to create, size and host a ShapeVisual
             compositor = Window.Current.Compositor;
             Windows.UI.Composition.ShapeVisual shape = compositor.CreateShapeVisual();
-            ElementCompositionPreview.SetElementChildVisual(VectorHost, shape);
-            shape.Size = new System.Numerics.Vector2((float)VectorHost.Width, (float)VectorHost.Height);
+            SetVisualOnElement(shape);
 
             // Call helper functions that use Win2D to build square and circle path geometries and create CompositionPath's for them
             CanvasGeometry square = BuildSquareGeometry();
@@ -170,17 +170,45 @@ namespace HelloVectors
         #region Play a more complex animation imported from After Effects with BodyMovin
         private void BodyMovinImperative_Click(object sender, RoutedEventArgs e)
         {
-
-            //https://www.lottiefiles.com/427-happy-birthday
+            ////https://www.lottiefiles.com/427-happy-birthday
 
             compositor = Window.Current.Compositor;
 
             SimplePlayer<HappyBirthday> player = new SimplePlayer<HappyBirthday>(Window.Current.Compositor);
 
-            ElementCompositionPreview.SetElementChildVisual(VectorHost, player.Visual);
+            player.SetSize(VectorHost.ActualWidth, VectorHost.ActualHeight);
+
+            SetVisualOnElement(player.AnimatedVisual.RootVisual);
 
             player.Play();
-        } 
+        }
         #endregion
+
+        private void BodyMovinImperativeAnimationPlayer_Click(object sender, RoutedEventArgs e)
+        {
+            compositor = Window.Current.Compositor;
+            
+            Microsoft.UI.Xaml.Controls.AnimatedVisualPlayer avp = new Microsoft.UI.Xaml.Controls.AnimatedVisualPlayer();
+
+            // Imported from here
+            // https://www.lottiefiles.com/3415-snowman
+            // And converted with Lottie Windows
+
+            avp.Source = new Snowman();
+            var ignore = avp.PlayAsync(0, 1.0, false);
+
+            VectorHost.Children.Clear();
+            VectorHost.Children.Add(avp);
+        }
+
+        private void SetVisualOnElement(Visual visual)
+        {
+            VectorHost.Children.Clear();
+            var rect = new Rectangle() { Fill = new SolidColorBrush(Colors.LightGray), HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch };
+            VectorHost.Children.Add(rect);
+            // set the size of the shape to match it's XAML host [note for completeness, listen to size change events]
+            visual.Size = new System.Numerics.Vector2((float)VectorHost.ActualWidth, (float)VectorHost.ActualHeight);
+            ElementCompositionPreview.SetElementChildVisual(rect, visual);
+        }
     }
 }

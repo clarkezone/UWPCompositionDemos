@@ -13,12 +13,11 @@
             <Button Click="SimpleShapeImperative_Click">Simple Shape Imperative</Button>
             <Button Click="SimplePathImperative_Click">Simple Path Imperative</Button>
             <Button Click="PathMorphImperative_Click">Path Morph Imperative</Button>
-            <Button Click="BodyMovinImperative_Click">Animation from After Effects</Button>
+            <Button Click="BodyMovinImperative_Click">Animation from After Effects using raw Visual Layer</Button>
+            <Button Click="BodyMovinImperativeAnimationPlayer_Click">Animation from After Effects using Microsoft.UI.Xaml.Controls.AnimatedVisualPlayer</Button>
         </StackPanel>
-        <Rectangle
-            x:Name="VectorHost"
-            Width="400"
-            Height="400"
-            Fill="LightGray" />
+        <Grid
+            x:Name="VectorHost" Margin="234,300,193,119"
+            />
     </Grid>
 </Page>
