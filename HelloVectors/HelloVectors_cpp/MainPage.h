@@ -21,6 +21,10 @@ namespace winrt::HelloVectors_cpp::implementation
 
 		void PathMorphImperative_Click(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& args);
 		
+		void BodyMovinImperative_Click(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& args);
+
+		void BodyMovinImperativeAnimationPlayer_Click(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& args);
+
 		void SimplePathImperative_Click(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& args);
 
 		Microsoft::Graphics::Canvas::Geometry::CanvasGeometry BuildSquareGeometry();
@@ -28,6 +32,8 @@ namespace winrt::HelloVectors_cpp::implementation
 		Microsoft::Graphics::Canvas::Geometry::CanvasGeometry BuildCircleGeometry();
 
 		Windows::UI::Composition::CompositionLinearGradientBrush CreateGradientBrush();
+
+		void SetVisualOnElement(const Windows::UI::Composition::Visual &);
     };
 }	
 

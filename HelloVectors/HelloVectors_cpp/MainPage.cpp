@@ -163,6 +163,46 @@ namespace winrt::HelloVectors_cpp::implementation
 		return gradBrush;
 	}
 
+	void MainPage::BodyMovinImperative_Click(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& args)
+	{
+		//////https://www.lottiefiles.com/427-happy-birthday
 
+		//compositor = Window.Current.Compositor;
+
+		//SimplePlayer<HappyBirthday> player = new SimplePlayer<HappyBirthday>(Window.Current.Compositor);
+
+		//player.SetSize(VectorHost.ActualWidth, VectorHost.ActualHeight);
+
+		//SetVisualOnElement(player.AnimatedVisual.RootVisual);
+
+		//player.Play();
+	}
+
+	void MainPage::BodyMovinImperativeAnimationPlayer_Click(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& args)
+	{
+		//compositor = Window.Current.Compositor;
+
+		//Microsoft.UI.Xaml.Controls.AnimatedVisualPlayer avp = new Microsoft.UI.Xaml.Controls.AnimatedVisualPlayer();
+
+		//// Imported from here
+		//// https://www.lottiefiles.com/3415-snowman
+		//// And converted with Lottie Windows
+
+		//avp.Source = new Snowman();
+		//var ignore = avp.PlayAsync(0, 1.0, false);
+
+		//VectorHost.Children.Clear();
+		//VectorHost.Children.Add(avp);
+	}
+
+	void MainPage::SetVisualOnElement(const Visual & visual)
+	{
+		//VectorHost().Children().Clear();
+		//var rect = new Rectangle(){ Fill = new SolidColorBrush(Colors.LightGray), HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch };
+		//VectorHost.Children.Add(rect);
+		//// set the size of the shape to match it's XAML host [note for completeness, listen to size change events]
+		//visual.Size = new System.Numerics.Vector2((float)VectorHost.ActualWidth, (float)VectorHost.ActualHeight);
+		//ElementCompositionPreview.SetElementChildVisual(rect, visual);
+	}
 
 }
