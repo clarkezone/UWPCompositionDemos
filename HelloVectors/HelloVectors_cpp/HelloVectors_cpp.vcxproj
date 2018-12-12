@@ -85,6 +85,7 @@
     <ClInclude Include="MainPage.h">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="SquareCircleMorph.h" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -121,6 +122,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Generated Files\module.g.cpp" />
+    <ClCompile Include="SquareCircleMorph.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="App.idl">

@@ -35,10 +35,7 @@ namespace winrt::HelloVectors_cpp::implementation
 		ShapeVisual shape = compositor.CreateShapeVisual();
 
 		// set this as a child of our host shape from XAML
-		ElementCompositionPreview::SetElementChildVisual(VectorHost(), shape);
-
-		// set the size of the shape to match it's XAML host [note for completeness, listen to size change events]
-		shape.Size(float2((float)VectorHost().Width(), (float)VectorHost().Height()));
+		SetVisualOnElement(shape);
 
 		// Create a circle geometry and set it's radius
 		auto circleGeometry = compositor.CreateEllipseGeometry();
@@ -58,9 +55,8 @@ namespace winrt::HelloVectors_cpp::implementation
 		// Same steps as for SimpleShapeImperative_Click to create, size and host a ShapeVisual
 		compositor = Window::Current().Compositor();
 		ShapeVisual shape = compositor.CreateShapeVisual();
-		ElementCompositionPreview::SetElementChildVisual(VectorHost(), shape);
-		shape.Size(float2((float)VectorHost().Width(), (float)VectorHost().Height()));
-
+		SetVisualOnElement(shape);
+		
 		// use Win2D's CanvasPathBuilder to create a simple path
 		auto pathBuilder = CanvasPathBuilder(CanvasDevice::GetSharedDevice());
 
@@ -91,8 +87,7 @@ namespace winrt::HelloVectors_cpp::implementation
 		// Same steps as for SimpleShapeImperative_Click to create, size and host a ShapeVisual
 		compositor = Window::Current().Compositor();
 		ShapeVisual shape = compositor.CreateShapeVisual();
-		ElementCompositionPreview::SetElementChildVisual(VectorHost(), shape);
-		shape.Size(float2((float)VectorHost().Width(), (float)VectorHost().Height()));
+		SetVisualOnElement(shape);
 
 		// Call helper functions that use Win2D to build square and circle path geometries and create CompositionPath's for them
 		CanvasGeometry square = BuildSquareGeometry();
@@ -167,42 +162,44 @@ namespace winrt::HelloVectors_cpp::implementation
 	{
 		//////https://www.lottiefiles.com/427-happy-birthday
 
-		//compositor = Window.Current.Compositor;
+		compositor = Window::Current().Compositor();
 
-		//SimplePlayer<HappyBirthday> player = new SimplePlayer<HappyBirthday>(Window.Current.Compositor);
+		//SimplePlayer<AnimatedVisuals::SquareCirclMorph> player = new SimplePlayer<AnimatedVisuals::SquareCirclMorph>(Window.Current.Compositor);
 
-		//player.SetSize(VectorHost.ActualWidth, VectorHost.ActualHeight);
+		/*player.SetSize(VectorHost.ActualWidth, VectorHost.ActualHeight);
 
-		//SetVisualOnElement(player.AnimatedVisual.RootVisual);
+		SetVisualOnElement(player.AnimatedVisual.RootVisual);
 
-		//player.Play();
+		player.Play();*/
 	}
 
 	void MainPage::BodyMovinImperativeAnimationPlayer_Click(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& args)
 	{
-		//compositor = Window.Current.Compositor;
+		compositor = Window::Current().Compositor();
 
-		//Microsoft.UI.Xaml.Controls.AnimatedVisualPlayer avp = new Microsoft.UI.Xaml.Controls.AnimatedVisualPlayer();
+		Microsoft::UI::Xaml::Controls::AnimatedVisualPlayer avp;
 
-		//// Imported from here
-		//// https://www.lottiefiles.com/3415-snowman
-		//// And converted with Lottie Windows
+		// Imported from here
+		// https://www.lottiefiles.com/3415-snowman
+		// And converted with Lottie Windows
 
-		//avp.Source = new Snowman();
-		//var ignore = avp.PlayAsync(0, 1.0, false);
+		AnimatedVisuals::SquareCircleMorph m;
+		avp.Source (m);
+		auto result = avp.PlayAsync(0.0, 1.0, false);
 
-		//VectorHost.Children.Clear();
-		//VectorHost.Children.Add(avp);
+		VectorHost().Children().Clear();
+		VectorHost().Children().Append(avp);
 	}
 
 	void MainPage::SetVisualOnElement(const Visual & visual)
 	{
-		//VectorHost().Children().Clear();
-		//var rect = new Rectangle(){ Fill = new SolidColorBrush(Colors.LightGray), HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch };
-		//VectorHost.Children.Add(rect);
+		VectorHost().Children().Clear();
+		Windows::UI::Xaml::Shapes::Rectangle rect;
+		//rect.Fill(SolidColorBrush(Colors::LightGray)), HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch };
+		VectorHost().Children().Append(rect);
 		//// set the size of the shape to match it's XAML host [note for completeness, listen to size change events]
-		//visual.Size = new System.Numerics.Vector2((float)VectorHost.ActualWidth, (float)VectorHost.ActualHeight);
-		//ElementCompositionPreview.SetElementChildVisual(rect, visual);
+		visual.Size({ (float)VectorHost().ActualWidth(), (float)VectorHost().ActualHeight() });
+		ElementCompositionPreview::SetElementChildVisual(rect, visual);
 	}
 
 }

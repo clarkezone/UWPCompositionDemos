@@ -10,6 +10,7 @@
 #include <unknwn.h>
 #include <hstring.h>
 #include "winrt/Windows.Foundation.h"
+#include "winrt/Windows.Foundation.Metadata.h"
 #include "winrt/Windows.ApplicationModel.Activation.h"
 #include "winrt/Windows.UI.Composition.h"
 #include "winrt/Windows.UI.Xaml.h"
@@ -25,3 +26,4 @@
 #include "Generated Files/winrt/Microsoft.Graphics.Canvas.Geometry.h"
 #include "Generated Files/winrt/Microsoft.UI.Xaml.Controls.h"
 #include "Generated Files/winrt/Microsoft.UI.Xaml.XamlTypeInfo.h"
+

@@ -5,6 +5,9 @@
 #pragma once
 
 #include "MainPage.g.h"
+//#include "SimplePlayer.h"
+#include "SquareCircleMorph.h"
+
 
 namespace winrt::HelloVectors_cpp::implementation
 {

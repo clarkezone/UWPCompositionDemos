@@ -13,9 +13,9 @@ namespace HelloVectors
     }
     class SimplePlayer<T> where T : IAnimatedVisualSource, new()
     {
-        T targetAnimation;
-        ScalarKeyFrameAnimation _playAnimation;
-        Compositor _compositor;
+        private T targetAnimation;
+        private ScalarKeyFrameAnimation _playAnimation;
+        private Compositor _compositor;
         private IAnimatedVisual _animatedVisual;
         object diagnostics;
 
