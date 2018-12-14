@@ -119,6 +119,7 @@ protected:
 	int mCurrentHeight = 0;
 };
 
+//Specialization of DesktopWindow that binds a composition tree to the HWND
 struct CompositionWindow : DesktopWindow<CompositionWindow>
 {
 	CompositionWindow(std::function<void(const Windows::UI::Composition::Compositor &, const Windows::UI::Composition::Visual &)> func) noexcept : CompositionWindow()
@@ -146,8 +147,6 @@ struct CompositionWindow : DesktopWindow<CompositionWindow>
 			nullptr, nullptr, wc.hInstance, this));
 
 		WINRT_ASSERT(m_window);
-
-
 	}
 
 	~CompositionWindow() {
