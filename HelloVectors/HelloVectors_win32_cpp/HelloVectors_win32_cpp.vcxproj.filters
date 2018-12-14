@@ -18,16 +18,13 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HelloVectors_win32.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="desktopwindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SquareCircleMorph.h">
+    <ClInclude Include="LottieTool\ICompositionSource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ICompositionSource.h">
+    <ClInclude Include="LottieTool\SquareCircleMorph.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -38,7 +35,7 @@
     <ClCompile Include="HelloVectors_win32.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SquareCircleMorph.cpp">
+    <ClCompile Include="LottieTool\SquareCircleMorph.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

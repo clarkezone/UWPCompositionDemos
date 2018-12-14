@@ -2,9 +2,8 @@
 //
 
 #include "pch.h"
-#include "HelloVectors_win32.h"
-#include "SquareCircleMorph.h"
-#include <iostream>
+#include "LottieTool/SquareCircleMorph.h"
+#include "desktopwindow.h"
 
 using namespace winrt;
 using namespace Windows::Foundation::Numerics;
