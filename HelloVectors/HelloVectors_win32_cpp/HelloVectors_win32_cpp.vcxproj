@@ -155,6 +155,7 @@
   <ItemGroup>
     <ClInclude Include="desktopwindow.h" />
     <ClInclude Include="HelloVectors_win32.h" />
+    <ClInclude Include="ICompositionSource.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="SquareCircleMorph.h" />
   </ItemGroup>

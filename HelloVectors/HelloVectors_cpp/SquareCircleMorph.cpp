@@ -355,7 +355,7 @@ void AnimatedVisuals::SquareCircleMorph::Play() {
 	auto linearEasing = mCompositor.CreateLinearEasingFunction();
 	progressAnimation.InsertKeyFrame(0, 0, linearEasing);
 	progressAnimation.InsertKeyFrame(1, 1, linearEasing);
-	auto balls = (AnimatedVisual*)thing;
+	auto balls = (AnimatedVisual*)mpVisual;
 	auto props = balls->RootVisual().Properties();
 	props.StartAnimation(L"Progress", progressAnimation);
 }

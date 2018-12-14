@@ -44,6 +44,6 @@ namespace AnimatedVisuals
 	private:
 		ScalarKeyFrameAnimation progressAnimation{ nullptr };
 		Compositor mCompositor{nullptr};
-		void* thing; //temp hack
+		void* mpVisual; //temp hack
 	};
 }

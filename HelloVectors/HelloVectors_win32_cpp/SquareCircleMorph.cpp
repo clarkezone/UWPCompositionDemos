@@ -105,7 +105,7 @@ namespace
 		return true;
 	}
 
-	class AnimatedVisual //sealed : public Microsoft::UI::Xaml::Controls::IAnimatedVisual TODO
+	class AnimatedVisual //sealed : public Microsoft::UI::Xaml::Controls::IAnimatedVisual
 	{
 		com_ptr<ID2D1Factory> _d2dFactory;
 		const int64_t c_durationTicks = 50050000L;
@@ -327,8 +327,18 @@ void AnimatedVisuals::SquareCircleMorph::TryCreateAnimatedVisual(
         return;
     }*/
 	auto balls = new AnimatedVisual(compositor);
-	thing = (void*)balls;
+	mpVisual = (void*)balls;
 	visuals.InsertAtTop(balls->RootVisual());
+}
+
+float2 AnimatedVisuals::SquareCircleMorph::GetSize() {
+	auto visual = (AnimatedVisual*)mpVisual;
+	return visual->Size();
+}
+
+Visual AnimatedVisuals::SquareCircleMorph::GetVisual() {
+	auto visual = (AnimatedVisual*)mpVisual;
+	return visual->RootVisual();
 }
 
 void AnimatedVisuals::SquareCircleMorph::Play() {
@@ -339,7 +349,7 @@ void AnimatedVisuals::SquareCircleMorph::Play() {
 	auto linearEasing = mCompositor.CreateLinearEasingFunction();
 	progressAnimation.InsertKeyFrame(0, 0, linearEasing);
 	progressAnimation.InsertKeyFrame(1, 1, linearEasing);
-	auto balls = (AnimatedVisual*)thing;
-	auto props = balls->RootVisual().Properties();
+	auto visual = (AnimatedVisual*)mpVisual;
+	auto props = visual->RootVisual().Properties();
 	props.StartAnimation(L"Progress", progressAnimation);
 }

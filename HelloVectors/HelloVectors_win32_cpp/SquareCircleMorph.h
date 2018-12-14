@@ -12,9 +12,11 @@ using namespace winrt;
 using namespace Windows::UI::Composition;
 using namespace Windows::Foundation::Numerics;
 
+#include "ICompositionSource.h"
+
 namespace AnimatedVisuals
 {
-	class SquareCircleMorph //sealed //: public ICompositionSource
+	class SquareCircleMorph //sealed : public ICompositionSource
 	{
 	public:
 		/* virtual Microsoft::UI::Xaml::Controls::IAnimatedVisual TryCreateAnimatedVisual(
@@ -40,10 +42,12 @@ namespace AnimatedVisuals
 		void TryCreateAnimatedVisual(
 			Compositor const& compositor, VisualCollection const& visuals);
 		void Play();
+		float2 GetSize();
+		Visual GetVisual();
 
 	private:
 		ScalarKeyFrameAnimation progressAnimation{ nullptr };
 		Compositor mCompositor{nullptr};
-		void* thing; //temp hack
+		void* mpVisual; //temp hack
 	};
 }
