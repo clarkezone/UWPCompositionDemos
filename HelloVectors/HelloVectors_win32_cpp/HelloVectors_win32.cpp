@@ -3,7 +3,7 @@
 
 #include "pch.h"
 #include "LottieTool/SquareCircleMorph.h"
-#include "desktopwindow.h"
+#include "desktopcompositionwindow.h"
 
 using namespace winrt;
 using namespace Windows::Foundation::Numerics;

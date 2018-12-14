@@ -46,6 +46,8 @@ struct DesktopWindow
 			WINRT_ASSERT(!that->m_window);
 			that->m_window = window;
 			SetWindowLongPtr(window, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(that));
+			EnableNonClientDpiScaling(window);
+			m_currentDpi = GetDpiForWindow(window);
 		}
 		else if (T* that = GetThisFromHandle(window))
 		{
@@ -55,31 +57,75 @@ struct DesktopWindow
 		return DefWindowProc(window, message, wparam, lparam);
 	}
 
+	// DPI Change handler. on WM_DPICHANGE resize the window
+	static LRESULT HandleDpiChange(HWND hWnd, WPARAM wParam, LPARAM lParam) {
+		//HWND hWndStatic = GetWindow(hWnd, GW_CHILD);
+		if (hWnd != nullptr) {
+			UINT uDpi = HIWORD(wParam);
+
+			// Resize the window
+			auto lprcNewScale = reinterpret_cast<RECT *>(lParam);
+
+			SetWindowPos(hWnd, nullptr, lprcNewScale->left, lprcNewScale->top,
+				lprcNewScale->right - lprcNewScale->left,
+				lprcNewScale->bottom - lprcNewScale->top,
+				SWP_NOZORDER | SWP_NOACTIVATE);
+
+			if (T *that = GetThisFromHandle(hWnd)) {
+				that->NewScale(uDpi);
+			}
+		}
+		return 0;
+	}
+
 	LRESULT MessageHandler(UINT const message, WPARAM const wparam, LPARAM const lparam) noexcept
 	{
-		if (WM_DESTROY == message)
+		switch (message) {
+		case WM_DPICHANGED: {
+			return HandleDpiChange(m_window, wparam, lparam);
+		}
+
+		case WM_DESTROY: message:
 		{
 			PostQuitMessage(0);
 			return 0;
 		}
 
+		case WM_SIZE: {
+			UINT width = LOWORD(lparam);
+			UINT height = HIWORD(lparam);
+
+			mCurrentWidth = width;
+			mCurrentHeight = height;
+			if (T *that = GetThisFromHandle(m_window)) {
+				that->DoResize(width, height);
+			}
+		}
+		}
+
 		return DefWindowProc(m_window, message, wparam, lparam);
 	}
+
+	void NewScale(UINT dpi) {}
+
+	void DoResize(UINT width, UINT height) {}
 
 protected:
 
 	using base_type = DesktopWindow<T>;
 	HWND m_window = nullptr;
 	inline static UINT m_currentDpi = 0;
+	int mCurrentWidth = 0;
+	int mCurrentHeight = 0;
 };
 
 struct CompositionWindow : DesktopWindow<CompositionWindow>
 {
 	CompositionWindow(std::function<void(const Windows::UI::Composition::Compositor &, const Windows::UI::Composition::Visual &)> func) noexcept : CompositionWindow()
 	{
-		//TODO: call base
 		PrepareVisuals(m_compositor);
 		func(m_compositor, m_root);
+		NewScale(m_currentDpi);
 	}
 
 	CompositionWindow() noexcept
@@ -101,9 +147,7 @@ struct CompositionWindow : DesktopWindow<CompositionWindow>
 
 		WINRT_ASSERT(m_window);
 
-		NewScale(m_currentDpi);
 
-		//func()
 	}
 
 	~CompositionWindow() {
@@ -117,28 +161,16 @@ struct CompositionWindow : DesktopWindow<CompositionWindow>
 
 	void NewScale(UINT dpi) {
 
-		// TODO: implement DPI scaling correctly
 		auto scaleFactor = (float)dpi / 100;
 
-		/*if (m_scale != nullptr) {
-			m_scale.ScaleX(scaleFactor);
-			m_scale.ScaleY(scaleFactor);
+		if (m_root != nullptr && scaleFactor > 0) {
+			m_root.Scale({ scaleFactor, scaleFactor, 1.0 });
 		}
-
-		ApplyCorrection(scaleFactor);*/
-	}
-
-	void ApplyCorrection(double scaleFactor) {
-		/*double rightCorrection = (m_rootGrid.Width() * scaleFactor - m_rootGrid.Width()) / scaleFactor;
-		double bottomCorrection = (m_rootGrid.Height() * scaleFactor - m_rootGrid.Height()) / scaleFactor;
-*/
-
 	}
 
 	void DoResize(UINT width, UINT height) {
 		m_currentWidth = width;
 		m_currentHeight = height;
-
 	}
 
 	DesktopWindowTarget CreateDesktopWindowTarget(Compositor const& compositor, HWND window)
