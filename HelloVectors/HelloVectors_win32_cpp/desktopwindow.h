@@ -8,8 +8,6 @@ using namespace Windows::UI;
 using namespace Windows::UI::Composition;
 using namespace Windows::UI::Composition::Desktop;
 
-#include <memory>
-
 auto CreateDispatcherQueueController()
 {
 	namespace abi = ABI::Windows::System;
@@ -119,6 +117,7 @@ struct CompositionWindow : DesktopWindow<CompositionWindow>
 
 	void NewScale(UINT dpi) {
 
+		// TODO: implement DPI scaling correctly
 		auto scaleFactor = (float)dpi / 100;
 
 		/*if (m_scale != nullptr) {
