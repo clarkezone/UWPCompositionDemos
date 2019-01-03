@@ -20,84 +20,36 @@ using namespace Windows::Graphics;
 
 namespace
 {
-	class GeoSource final :
-		public ABI::Windows::Graphics::IGeometrySource2D,
-		public ABI::Windows::Graphics::IGeometrySource2DInterop
+	struct GeoSource final : implements<GeoSource,
+	Windows::Graphics::IGeometrySource2D,
+	ABI::Windows::Graphics::IGeometrySource2DInterop>
+{
+public:
+	GeoSource(com_ptr<ID2D1Geometry> const & pGeometry) :
+		_cpGeometry(pGeometry)
+	{ }
+
+	IFACEMETHODIMP GetGeometry(ID2D1Geometry** value) override
 	{
-		ULONG _cRef;
-		com_ptr<ID2D1Geometry> _cpGeometry;
+		_cpGeometry.copy_to(value);
+		return S_OK;
+	}
 
-	public:
-		GeoSource(com_ptr<ID2D1Geometry> pGeometry)
-			: _cRef(1)
-			, _cpGeometry(pGeometry)
-		{ }
+	IFACEMETHODIMP TryGetGeometryUsingFactory(ID2D1Factory*, ID2D1Geometry** result) override
+	{
+		*result = nullptr;
+		return E_NOTIMPL;
+	}
 
-		IFACEMETHODIMP QueryInterface(REFIID iid, void ** ppvObject) override
-		{
-			if (iid == __uuidof(ABI::Windows::Graphics::IGeometrySource2DInterop))
-			{
-				AddRef();
-				*ppvObject = static_cast<ABI::Windows::Graphics::IGeometrySource2DInterop*>(this);
-				return S_OK;
-			} else if (iid == __uuidof(ABI::Windows::Graphics::IGeometrySource2D))
-			{
-				AddRef();
-				*ppvObject = static_cast<ABI::Windows::Graphics::IGeometrySource2D*>(this);
-				return S_OK;
-			}
-			return E_NOINTERFACE;
-		}
-
-		IFACEMETHODIMP_(ULONG) AddRef() override
-		{
-			return InterlockedIncrement(&_cRef);
-		}
-
-		IFACEMETHODIMP_(ULONG) Release() override
-		{
-			ULONG cRef = InterlockedDecrement(&_cRef);
-			if (cRef == 0)
-			{
-				delete this;
-			}
-			return cRef;
-		}
-
-		IFACEMETHODIMP GetIids(ULONG*, IID**) override
-		{
-			return E_NOTIMPL;
-		}
-
-		IFACEMETHODIMP GetRuntimeClassName(HSTRING*) override
-		{
-			return E_NOTIMPL;
-		}
-
-		IFACEMETHODIMP GetTrustLevel(TrustLevel*) override
-		{
-			return E_NOTIMPL;
-		}
-
-		IFACEMETHODIMP GetGeometry(ID2D1Geometry** value) override
-		{
-			*value = _cpGeometry.get();
-			(*value)->AddRef();
-			return S_OK;
-		}
-
-		IFACEMETHODIMP TryGetGeometryUsingFactory(ID2D1Factory*, ID2D1Geometry**) override
-		{
-			return E_NOTIMPL;
-		}
-	};
+private:
+	com_ptr<ID2D1Geometry> _cpGeometry;
+};
 
 
-	//typedef com_ptr<GeoSource> cpCanvasGeometry;
+	typedef com_ptr<GeoSource> cpCanvasGeometry;
+
 	static bool IsRuntimeCompatible()
 	{
-		return false;
-		
 		if (!Windows::Foundation::Metadata::ApiInformation::IsTypePresent(L"Windows.UI.Composition.CompositionGeometricClip"))
 		{
 			return false;
@@ -133,9 +85,9 @@ namespace
 			return _c.CreateCubicBezierEasingFunction({ 0.166999996F, 0.166999996F }, { 0.833000004F, 0.833000004F });
 		}
 
-		com_ptr<GeoSource> Geometry_0()
+		cpCanvasGeometry Geometry_0()
 		{
-			com_ptr<GeoSource> result;
+			cpCanvasGeometry result;
 			com_ptr<ID2D1PathGeometry> path;
 			check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
 			com_ptr<ID2D1GeometrySink> sink;
@@ -154,9 +106,9 @@ namespace
 			return result;
 		}
 
-		com_ptr<GeoSource> Geometry_1()
+		cpCanvasGeometry Geometry_1()
 		{
-			com_ptr<GeoSource> result;
+			cpCanvasGeometry result;
 			com_ptr<ID2D1PathGeometry> path;
 			check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
 			com_ptr<ID2D1GeometrySink> sink;
@@ -173,9 +125,9 @@ namespace
 			return result;
 		}
 
-		com_ptr<GeoSource> Geometry_2()
+		cpCanvasGeometry Geometry_2()
 		{
-			com_ptr<GeoSource> result;
+			cpCanvasGeometry result;
 			com_ptr<ID2D1PathGeometry> path;
 			check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
 			com_ptr<ID2D1GeometrySink> sink;
@@ -322,10 +274,10 @@ void AnimatedVisuals::SquareCircleMorph::TryCreateAnimatedVisual(
 	mCompositor = compositor;
 	
 	//TODO fix
-   /* if (!IsRuntimeCompatible())
+    if (!IsRuntimeCompatible())
     {
         return;
-    }*/
+    }
 	auto balls = new AnimatedVisual(compositor);
 	mpVisual = (void*)balls;
 	visuals.InsertAtTop(balls->RootVisual());

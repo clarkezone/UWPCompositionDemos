@@ -9,13 +9,12 @@
 #ifndef PCH_H
 #define PCH_H
 
-#include <unknwn.h>
-#include <winrt/Windows.System.h>
-#include <winrt/Windows.UI.Composition.Desktop.h>
-#include <winrt/Windows.Foundation.Metadata.h>
 #include <windows.ui.composition.interop.h>
 #include <ShellScalingAPI.h>
 #include <DispatcherQueue.h>
+#include <winrt/Windows.System.h>
+#include <winrt/Windows.UI.Composition.Desktop.h>
+#include <winrt/Windows.Foundation.Metadata.h>
 
 #include <memory>
 #include "d2d1.h"
