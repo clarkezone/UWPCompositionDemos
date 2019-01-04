@@ -14,6 +14,13 @@ using namespace Windows::Foundation::Numerics;
 
 #include "ICompositionSource.h"
 
+//from this interface:
+//https://github.com/Microsoft/microsoft-ui-xaml/blob/4bc19189a8b752bebab375ef950aa1a546891ae5/dev/AnimatedVisualPlayer/AnimatedVisualPlayer.idl
+//[webhosthidden]
+//interface IAnimatedVisual   requires Windows.Foundation.IClosable{ Windows.UI.Composition.Visual RootVisual{ get; };  
+//Windows.Foundation.Numerics.Vector2 Size{ get; };  
+//Windows.Foundation.TimeSpan Duration{ get; }; };
+
 namespace Microsoft::UI::Xaml::Controls {
 	struct IAnimatedVisual {
 		//
