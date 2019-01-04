@@ -14,40 +14,33 @@ using namespace Windows::Foundation::Numerics;
 
 #include "ICompositionSource.h"
 
+namespace Microsoft::UI::Xaml::Controls {
+	struct IAnimatedVisual {
+		//
+		//virtual Windows::Foundation::TimeSpan get_Duration() {}
+		virtual Visual GetVisual() {}
+		virtual float2 GetSize() {}
+	};
+}
+
 namespace AnimatedVisuals
 {
-	class SquareCircleMorph //sealed : public ICompositionSource
+	class SquareCircleMorph  //sealed : public ICompositionSource
 	{
 	public:
-		/* virtual Microsoft::UI::Xaml::Controls::IAnimatedVisual TryCreateAnimatedVisual(
-			 Windows::UI::Composition::Compositor compositor,
-			 Platform::Object^* diagnostics);*/
+		com_ptr<Microsoft::UI::Xaml::Controls::IAnimatedVisual> TryCreateAnimatedVisual(
+			Compositor const& compositor,
+			winrt::Windows::Foundation::IInspectable const& object);
 
-			 /*int32_t TryCreateInstance(Windows::UI::Composition::Compositor,
-				 Windows::UI::Composition::Visual&,
-				 Windows::Foundation::Numerics::float2&,
-				 Windows::UI::Composition::CompositionPropertySet&,
-				 Windows::Foundation::TimeSpan&);*/
-
-
-		/*com_ptr<AnimatedVisual> TryCreateAnimatedVisual(
-			Windows::UI::Composition::Compositor compositor,
-			Platform::Object^* diagnostics);*/
-
-			/*int32_t TryCreateInstance(Windows::UI::Composition::Compositor,
-				Windows::UI::Composition::Visual&,
-				Windows::Foundation::Numerics::float2&,
-				Windows::UI::Composition::CompositionPropertySet&,
-				Windows::Foundation::TimeSpan&);*/
-		void TryCreateAnimatedVisual(
-			Compositor const& compositor, VisualCollection const& visuals);
+		/*void TryCreateAnimatedVisual(
+			Compositor const& compositor, VisualCollection const& visuals);*/
 		void Play();
 		float2 GetSize();
 		Visual GetVisual();
 
 	private:
 		ScalarKeyFrameAnimation progressAnimation{ nullptr };
-		Compositor mCompositor{nullptr};
+		Compositor mCompositor{ nullptr };
 		void* mpVisual; //temp hack
 	};
 }

@@ -255,7 +255,11 @@ void Scenario4PlayLottieOutput(const Compositor & compositor, const ContainerVis
 	container.Offset({ 0.0f, 300.0f, 1.0f });
 
 	static std::unique_ptr<AnimatedVisuals::SquareCircleMorph> shapeToolOutput = std::make_unique< AnimatedVisuals::SquareCircleMorph>();
-	shapeToolOutput->TryCreateAnimatedVisual(compositor, container.Children());
+	//shapeToolOutput->TryCreateAnimatedVisual(compositor, container.Children());
+
+	auto avptr = shapeToolOutput->TryCreateAnimatedVisual(compositor, nullptr);
+	auto visual = avptr->GetVisual();
+	container.Children().InsertAtTop(visual);
 
 	// Calculate a scale to make the animation fit into the specified visual size
 	container.Scale({ width / shapeToolOutput->GetSize().x, height / shapeToolOutput->GetSize().y, 1.0f });

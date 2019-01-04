@@ -162,12 +162,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="data.h" />
     <ClInclude Include="desktopcompositionwindow.h" />
     <ClInclude Include="LottieTool\ICompositionSource.h" />
     <ClInclude Include="LottieTool\SquareCircleMorph.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="data.cpp" />
     <ClCompile Include="HelloVectors_win32.cpp" />
     <ClCompile Include="LottieTool\SquareCircleMorph.cpp" />
     <ClCompile Include="pch.cpp">

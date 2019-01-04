@@ -15,16 +15,16 @@
 #include <Windows.Graphics.Interop.h>
 
 using namespace winrt;
+using namespace Windows::Foundation;
 using namespace Windows::UI::Composition;
 using namespace Windows::Graphics;
 
 namespace
 {
-	struct GeoSource final : implements<GeoSource,
+struct GeoSource final : implements<GeoSource,
 	Windows::Graphics::IGeometrySource2D,
 	ABI::Windows::Graphics::IGeometrySource2DInterop>
 {
-public:
 	GeoSource(com_ptr<ID2D1Geometry> const & pGeometry) :
 		_cpGeometry(pGeometry)
 	{ }
@@ -57,7 +57,8 @@ private:
 		return true;
 	}
 
-	class AnimatedVisual //sealed : public Microsoft::UI::Xaml::Controls::IAnimatedVisual
+	class AnimatedVisual final : implements<AnimatedVisual,
+		Microsoft::UI::Xaml::Controls::IAnimatedVisual> //sealed : public Microsoft::UI::Xaml::Controls::IAnimatedVisual
 	{
 		com_ptr<ID2D1Factory> _d2dFactory;
 		const int64_t c_durationTicks = 50050000L;
@@ -156,10 +157,11 @@ private:
 		// Path 1.PathGeometry
 		CompositionPathGeometry PathGeometry()
 		{
-			auto temp = Geometry_0();
-			CompositionPath compositionPath(temp.as<IGeometrySource2D>());
+			//CompositionPath compositionPath(Geometry_0().as<IGeometrySource2D>());
 
-			auto result = _c.CreatePathGeometry(compositionPath);
+			//auto result = _c.CreatePathGeometry(compositionPath);
+			auto result = _c.CreatePathGeometry(CompositionPath(Geometry_0().as<IGeometrySource2D>()));
+
 			result.StartAnimation(L"Path", PathKeyFrameAnimation());
 			auto controller = result.TryGetAnimationController(L"Path");
 			controller.Pause();
@@ -176,7 +178,7 @@ private:
 		PathKeyFrameAnimation PathKeyFrameAnimation()
 		{
 			auto result = _c.CreatePathKeyFrameAnimation();
-			result.Duration(Windows::Foundation::TimeSpan{ c_durationTicks });
+			result.Duration(TimeSpan{ c_durationTicks });
 			result.InsertKeyFrame(0, CompositionPath(Geometry_1().as<IGeometrySource2D>()), LinearEasingFunction());
 			result.InsertKeyFrame(0.239999995F, CompositionPath(Geometry_2().as<IGeometrySource2D>()), CubicBezierEasingFunction());
 			return result;
@@ -233,12 +235,6 @@ private:
 		        return Windows::Foundation::TimeSpan { c_durationTicks };
 		    }
 
-			void set_duration(Windows::Foundation::TimeSpan duration)
-			{
-				//TODO: 
-				//c_durationTicks = duration.count();
-			}
-		
 		    Windows::UI::Composition::Visual RootVisual()
 		    {
 		        return _root;
@@ -268,20 +264,32 @@ private:
 #include <memory>
 #include <chrono>
 
-void AnimatedVisuals::SquareCircleMorph::TryCreateAnimatedVisual(
-	Compositor const& compositor, VisualCollection const& visuals)
+com_ptr<Microsoft::UI::Xaml::Controls::IAnimatedVisual> AnimatedVisuals::SquareCircleMorph::TryCreateAnimatedVisual(Compositor const & compositor, winrt::Windows::Foundation::IInspectable const & object)
 {
 	mCompositor = compositor;
-	
-	//TODO fix
-    if (!IsRuntimeCompatible())
-    {
-        return;
-    }
-	auto balls = new AnimatedVisual(compositor);
-	mpVisual = (void*)balls;
-	visuals.InsertAtTop(balls->RootVisual());
+
+	if (!IsRuntimeCompatible())
+	{
+		return nullptr;
+	}
+	auto thing = winrt::make<AnimatedVisual>(compositor);
+	return thing;
 }
+
+//void AnimatedVisuals::SquareCircleMorph::TryCreateAnimatedVisual(
+//	Compositor const& compositor, VisualCollection const& visuals)
+//{
+//	mCompositor = compositor;
+//	
+//	//TODO fix
+//    if (!IsRuntimeCompatible())
+//    {
+//        return;
+//    }
+//	auto balls = new AnimatedVisual(compositor);
+//	mpVisual = (void*)balls;
+//	visuals.InsertAtTop(balls->RootVisual());
+//}
 
 float2 AnimatedVisuals::SquareCircleMorph::GetSize() {
 	auto visual = (AnimatedVisual*)mpVisual;
