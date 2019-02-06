@@ -248,26 +248,26 @@ ScalarKeyFrameAnimation Play(const Compositor & compositor, Visual const & visua
 
 // Scenario 4
 void Scenario4PlayLottieOutput(const Compositor & compositor, const ContainerVisual & root) {
-	//configure a container visual
-	float width = 500.0f, height = 300.0f;
-	SpriteVisual container = compositor.CreateSpriteVisual();
-	container.Size({ width, height });
-	container.Offset({ 0.0f, 300.0f, 1.0f });
+	////configure a container visual
+	//float width = 500.0f, height = 300.0f;
+	//SpriteVisual container = compositor.CreateSpriteVisual();
+	//container.Size({ width, height });
+	//container.Offset({ 0.0f, 300.0f, 1.0f });
 
-	static std::unique_ptr<AnimatedVisuals::SquareCircleMorph> shapeToolOutput = std::make_unique< AnimatedVisuals::SquareCircleMorph>();
-	//shapeToolOutput->TryCreateAnimatedVisual(compositor, container.Children());
+	//static std::unique_ptr<AnimatedVisuals::SquareCircleMorph> shapeToolOutput = std::make_unique< AnimatedVisuals::SquareCircleMorph>();
+	////shapeToolOutput->TryCreateAnimatedVisual(compositor, container.Children());
 
-	auto avptr = shapeToolOutput->TryCreateAnimatedVisual(compositor, nullptr);
-	auto visual = avptr->GetVisual();
-	container.Children().InsertAtTop(visual);
+	//auto avptr = shapeToolOutput->TryCreateAnimatedVisual(compositor, nullptr);
+	//auto visual = avptr->GetVisual();
+	//container.Children().InsertAtTop(visual);
 
-	// Calculate a scale to make the animation fit into the specified visual size
-	container.Scale({ width / shapeToolOutput->GetSize().x, height / shapeToolOutput->GetSize().y, 1.0f });
-	
-	// Add to the visual tree
-	root.Children().InsertAtTop(container);
+	//// Calculate a scale to make the animation fit into the specified visual size
+	//container.Scale({ width / shapeToolOutput->GetSize().x, height / shapeToolOutput->GetSize().y, 1.0f });
+	//
+	//// Add to the visual tree
+	//root.Children().InsertAtTop(container);
 
-	auto playanimation = Play(compositor, shapeToolOutput->GetVisual());
+	//auto playanimation = Play(compositor, shapeToolOutput->GetVisual());
 }
 
 // end scenario 3

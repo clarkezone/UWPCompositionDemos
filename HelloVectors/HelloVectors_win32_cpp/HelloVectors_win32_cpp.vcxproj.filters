@@ -4,14 +4,15 @@
     <ClInclude Include="desktopcompositionwindow.h" />
     <ClInclude Include="LottieTool\ICompositionSource.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="LottieTool\SquareCircleMorph.h" />
     <ClInclude Include="data.h" />
+    <ClInclude Include="snowman.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HelloVectors_win32.cpp" />
     <ClCompile Include="pch.cpp" />
-    <ClCompile Include="LottieTool\SquareCircleMorph.cpp" />
     <ClCompile Include="data.cpp" />
+    <ClCompile Include="snowman.cpp" />
+    <ClCompile Include="0016.body_movin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ToolOutput">
