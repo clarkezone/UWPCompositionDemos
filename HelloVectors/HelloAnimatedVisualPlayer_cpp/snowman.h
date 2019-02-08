@@ -8,8 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-#include "pch.h"
-
 namespace AnimatedVisuals
 {
 	struct SampleSource : winrt::implements<SampleSource, winrt::Microsoft::UI::Xaml::Controls::IAnimatedVisualSource>
