@@ -24,7 +24,7 @@ namespace winrt::HelloAnimatedVisualPlayer_cpp::implementation
 
     void MainPage::ClickHandler(IInspectable const&, RoutedEventArgs const&)
     {
-		SampleSource s;
+		AnimatedVisuals::SampleSource s;
 		
 		avp().Source(s);
 		auto async = avp().PlayAsync(0.0, 1.0, false);

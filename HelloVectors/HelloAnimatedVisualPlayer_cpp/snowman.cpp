@@ -5629,7 +5629,7 @@ namespace
 	};
 } // end namespace
 
-winrt::Microsoft::UI::Xaml::Controls::IAnimatedVisual SampleSource::TryCreateAnimatedVisual(
+winrt::Microsoft::UI::Xaml::Controls::IAnimatedVisual AnimatedVisuals::SampleSource::TryCreateAnimatedVisual(
 	winrt::Windows::UI::Composition::Compositor const& compositor,
 	winrt::Windows::Foundation::IInspectable& diagnostics)
 {

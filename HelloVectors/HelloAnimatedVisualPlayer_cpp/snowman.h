@@ -10,10 +10,12 @@
 
 #include "pch.h"
 
-
-struct SampleSource : winrt::implements<SampleSource, winrt::Microsoft::UI::Xaml::Controls::IAnimatedVisualSource>
+namespace AnimatedVisuals
 {
-	winrt::Microsoft::UI::Xaml::Controls::IAnimatedVisual TryCreateAnimatedVisual(
-		winrt::Windows::UI::Composition::Compositor const& compositor,
-		winrt::Windows::Foundation::IInspectable& diagnostics);
-};
+	struct SampleSource : winrt::implements<SampleSource, winrt::Microsoft::UI::Xaml::Controls::IAnimatedVisualSource>
+	{
+		winrt::Microsoft::UI::Xaml::Controls::IAnimatedVisual TryCreateAnimatedVisual(
+			winrt::Windows::UI::Composition::Compositor const& compositor,
+			winrt::Windows::Foundation::IInspectable& diagnostics);
+	};
+}
