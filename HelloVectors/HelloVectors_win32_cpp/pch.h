@@ -9,12 +9,20 @@
 #ifndef PCH_H
 #define PCH_H
 
+#include <windows.h>
+#include <unknwn.h>
+
 #include <windows.ui.composition.interop.h>
 #include <ShellScalingAPI.h>
 #include <DispatcherQueue.h>
 #include <winrt/Windows.System.h>
 #include <winrt/Windows.UI.Composition.Desktop.h>
 #include <winrt/Windows.Foundation.Metadata.h>
+
+#include "winrt/Microsoft.UI.Xaml.Automation.Peers.h"
+#include "winrt/Microsoft.UI.Xaml.Controls.Primitives.h"
+#include "winrt/Microsoft.UI.Xaml.Media.h"
+#include "winrt/Microsoft.UI.Xaml.XamlTypeInfo.h"
 
 #include <memory>
 #include "d2d1.h"

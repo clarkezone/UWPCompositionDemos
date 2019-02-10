@@ -10,7 +10,7 @@
 
 namespace AnimatedVisuals
 {
-	struct SampleSource : winrt::implements<SampleSource, winrt::Microsoft::UI::Xaml::Controls::IAnimatedVisualSource>
+	struct Body_movin : winrt::implements<Body_movin, winrt::Microsoft::UI::Xaml::Controls::IAnimatedVisualSource>
 	{
 		winrt::Microsoft::UI::Xaml::Controls::IAnimatedVisual TryCreateAnimatedVisual(
 			winrt::Windows::UI::Composition::Compositor const& compositor,

@@ -2,7 +2,7 @@
 //
 
 #include "pch.h"
-#include "LottieTool/SquareCircleMorph.h"
+#include "0016.body_movin.h"
 #include "desktopcompositionwindow.h"
 
 using namespace winrt;
@@ -248,11 +248,14 @@ ScalarKeyFrameAnimation Play(const Compositor & compositor, Visual const & visua
 
 // Scenario 4
 void Scenario4PlayLottieOutput(const Compositor & compositor, const ContainerVisual & root) {
-	////configure a container visual
-	//float width = 500.0f, height = 300.0f;
-	//SpriteVisual container = compositor.CreateSpriteVisual();
-	//container.Size({ width, height });
-	//container.Offset({ 0.0f, 300.0f, 1.0f });
+	//configure a container visual
+	float width = 500.0f, height = 300.0f;
+	SpriteVisual container = compositor.CreateSpriteVisual();
+	container.Size({ width, height });
+	container.Offset({ 0.0f, 300.0f, 1.0f });
+
+	AnimatedVisuals::Body_movin bmv;
+	auto result = bmv.TryCreateAnimatedVisual(compositor, nullptr);
 
 	//static std::unique_ptr<AnimatedVisuals::SquareCircleMorph> shapeToolOutput = std::make_unique< AnimatedVisuals::SquareCircleMorph>();
 	////shapeToolOutput->TryCreateAnimatedVisual(compositor, container.Children());

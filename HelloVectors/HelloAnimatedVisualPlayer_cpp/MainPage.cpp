@@ -1,6 +1,6 @@
 ﻿#include "pch.h"
 #include "MainPage.h"
-#include "snowman.h"
+#include "0016.body_movin.h"
 
 using namespace winrt;
 using namespace Windows::UI::Xaml;
@@ -24,7 +24,7 @@ namespace winrt::HelloAnimatedVisualPlayer_cpp::implementation
 
     void MainPage::ClickHandler(IInspectable const&, RoutedEventArgs const&)
     {
-		AnimatedVisuals::SampleSource s;
+		AnimatedVisuals::Body_movin s;
 		
 		avp().Source(s);
 		auto async = avp().PlayAsync(0.0, 1.0, false);
