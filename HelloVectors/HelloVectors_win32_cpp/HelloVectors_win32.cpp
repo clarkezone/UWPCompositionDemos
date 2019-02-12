@@ -253,28 +253,23 @@ void Scenario4PlayLottieOutput(const Compositor & compositor, const ContainerVis
 	SpriteVisual container = compositor.CreateSpriteVisual();
 	container.Size({ width, height });
 	container.Offset({ 0.0f, 300.0f, 1.0f });
+	root.Children().InsertAtTop(container);
 
 	AnimatedVisuals::Body_movin bmv;
 
 	//NOTE to make this scenario compile with prerelease Microsoft.UI.Xaml package 190131001 you need to edit: …\UWPCompositionDemos\HelloVectors\packages\Microsoft.UI.Xaml.2.1.190131001-prerelease\build\native\Microsoft.UI.Xaml.targets
 	//and change <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'UAP'"> with <ItemGroup>
 
-	auto result = bmv.TryCreateAnimatedVisual(compositor, nullptr);
+	winrt::Windows::Foundation::IInspectable diags;
+	auto avptr = bmv.TryCreateAnimatedVisual(compositor, diags);
 
-	//static std::unique_ptr<AnimatedVisuals::SquareCircleMorph> shapeToolOutput = std::make_unique< AnimatedVisuals::SquareCircleMorph>();
-	////shapeToolOutput->TryCreateAnimatedVisual(compositor, container.Children());
-
-	//auto avptr = shapeToolOutput->TryCreateAnimatedVisual(compositor, nullptr);
-	//auto visual = avptr->GetVisual();
-	//container.Children().InsertAtTop(visual);
+	auto visual = avptr.RootVisual();
+	container.Children().InsertAtTop(visual);
 
 	//// Calculate a scale to make the animation fit into the specified visual size
-	//container.Scale({ width / shapeToolOutput->GetSize().x, height / shapeToolOutput->GetSize().y, 1.0f });
-	//
-	//// Add to the visual tree
-	//root.Children().InsertAtTop(container);
+	container.Scale({ width / avptr.Size().x, height / avptr.Size().y, 1.0f });
 
-	//auto playanimation = Play(compositor, shapeToolOutput->GetVisual());
+	auto playanimation = Play(compositor, visual);
 }
 
 // end scenario 3
