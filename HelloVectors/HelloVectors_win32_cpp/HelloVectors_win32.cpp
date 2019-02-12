@@ -255,6 +255,10 @@ void Scenario4PlayLottieOutput(const Compositor & compositor, const ContainerVis
 	container.Offset({ 0.0f, 300.0f, 1.0f });
 
 	AnimatedVisuals::Body_movin bmv;
+
+	//NOTE to make this scenario compile with prerelease Microsoft.UI.Xaml package 190131001 you need to edit: …\UWPCompositionDemos\HelloVectors\packages\Microsoft.UI.Xaml.2.1.190131001-prerelease\build\native\Microsoft.UI.Xaml.targets
+	//and change <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'UAP'"> with <ItemGroup>
+
 	auto result = bmv.TryCreateAnimatedVisual(compositor, nullptr);
 
 	//static std::unique_ptr<AnimatedVisuals::SquareCircleMorph> shapeToolOutput = std::make_unique< AnimatedVisuals::SquareCircleMorph>();
