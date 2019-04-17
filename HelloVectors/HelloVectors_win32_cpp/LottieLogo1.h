@@ -8,13 +8,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AnimatedVisuals 
+namespace AnimatedVisuals
 {
-class Snowman sealed //: public Microsoft::UI::Xaml::Controls::IAnimatedVisualSource
-{
-public:
-   /* virtual Microsoft::UI::Xaml::Controls::IAnimatedVisual^ TryCreateAnimatedVisual(
-        Windows::UI::Composition::Compositor^ compositor,
-        Platform::Object^* diagnostics);*/
-};
+	struct LottieLogo1 : winrt::implements<LottieLogo1, winrt::Microsoft::UI::Xaml::Controls::IAnimatedVisualSource>
+	{
+		winrt::Microsoft::UI::Xaml::Controls::IAnimatedVisual TryCreateAnimatedVisual(
+			winrt::Windows::UI::Composition::Compositor const& compositor,
+			winrt::Windows::Foundation::IInspectable& diagnostics);
+	};
 }

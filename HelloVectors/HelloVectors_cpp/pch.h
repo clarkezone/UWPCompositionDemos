@@ -22,6 +22,7 @@
 #include "winrt/Windows.UI.Xaml.Markup.h"
 #include "winrt/Windows.UI.Xaml.Navigation.h"
 #include "winrt/Windows.UI.Xaml.Shapes.h"
+#include "winrt/Windows.Foundation.Collections.h"
 #include "Generated Files/winrt/Microsoft.Graphics.Canvas.h"
 #include "Generated Files/winrt/Microsoft.Graphics.Canvas.Geometry.h"
 #include "Generated Files/winrt/Microsoft.UI.Xaml.Controls.h"

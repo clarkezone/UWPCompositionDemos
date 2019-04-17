@@ -23,6 +23,7 @@
 #include "winrt/Microsoft.UI.Xaml.Controls.Primitives.h"
 #include "winrt/Microsoft.UI.Xaml.Media.h"
 #include "winrt/Microsoft.UI.Xaml.XamlTypeInfo.h"
+#include "winrt/Windows.Foundation.Collections.h"
 
 #include <memory>
 #include "d2d1.h"

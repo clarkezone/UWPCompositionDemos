@@ -2,7 +2,7 @@
 //
 
 #include "pch.h"
-#include "0016.body_movin.h"
+#include "LottieLogo1.h"
 #include "desktopcompositionwindow.h"
 
 using namespace winrt;
@@ -18,14 +18,14 @@ void Scenario1SimpleShape(const Compositor & compositor, const ContainerVisual &
 	ShapeVisual shape = compositor.CreateShapeVisual();
 	shape.Size({ 100.0f,100.0f });
 
-	// Create a circle geometry and set it's radius
+	// Create a circle geometry and set its radius
 	auto circleGeometry = compositor.CreateEllipseGeometry();
-	circleGeometry.Radius(float2(30, 30));
+	circleGeometry.Radius({ 30.0f, 30.0f });
 
 	// Create a shape object from the geometry and give it a color and offset
 	auto circleShape = compositor.CreateSpriteShape(circleGeometry);
 	circleShape.FillBrush(compositor.CreateColorBrush(Windows::UI::Colors::Orange()));
-	circleShape.Offset(float2(50, 50));
+	circleShape.Offset({ 50.0f, 50.0f });
 
 	// Add the circle to our shape visual
 	shape.Shapes().Append(circleShape);
@@ -37,10 +37,10 @@ void Scenario1SimpleShape(const Compositor & compositor, const ContainerVisual &
 // end Scenario 1
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// Scenario 2 constrcut a simple path using ShapeVisual, Composition Path and Direct2D
+// Scenario 2 construct a simple path using ShapeVisual, Composition Path and Direct2D
 ///////////////////////////////////////////////////////////////////////////////////////
 
-// Helper funciton to create a GradientBrush
+// Helper function to create a GradientBrush
 Windows::UI::Composition::CompositionLinearGradientBrush CreateGradientBrush(const Compositor & compositor)
 {
 	auto gradBrush = compositor.CreateLinearGradientBrush();
@@ -102,7 +102,7 @@ void Scenario2SimplePath(const Compositor & compositor, const ContainerVisual & 
 	sink->AddLine({ 300, 300 });
 	sink->AddLine({ 1, 300 });
 	sink->EndFigure(D2D1_FIGURE_END_CLOSED);
-	
+
 	// Close geometry sink
 	check_hresult(sink->Close());
 
@@ -202,7 +202,7 @@ void Scenario3PathMorphImperative(const Compositor & compositor, const Container
 	// Create a CompositionPathGeometry, CompositionSpriteShape and set offset and fill
 	CompositionPathGeometry compositionPathGeometry = compositor.CreatePathGeometry(squarePath);
 	CompositionSpriteShape spriteShape = compositor.CreateSpriteShape(compositionPathGeometry);
-	spriteShape.Offset(float2(150, 200));
+	spriteShape.Offset({ 150.0f, 200.0f });
 	spriteShape.FillBrush(CreateGradientBrush(compositor));
 
 	// Create a PathKeyFrameAnimation to set up the path morph passing in the circle and square paths
@@ -235,13 +235,13 @@ void Scenario3PathMorphImperative(const Compositor & compositor, const Container
 // Helper funciton for playing back lottie generated animations
 ScalarKeyFrameAnimation Play(const Compositor & compositor, Visual const & visual) {
 	auto progressAnimation = compositor.CreateScalarKeyFrameAnimation();
-	progressAnimation.Duration(std::chrono::seconds(2));
+	progressAnimation.Duration(std::chrono::seconds(5));
 	progressAnimation.IterationBehavior(AnimationIterationBehavior::Forever);
 	progressAnimation.Direction(AnimationDirection::Alternate);
 	auto linearEasing = compositor.CreateLinearEasingFunction();
 	progressAnimation.InsertKeyFrame(0, 0, linearEasing);
 	progressAnimation.InsertKeyFrame(1, 1, linearEasing);
-	
+
 	visual.Properties().StartAnimation(L"Progress", progressAnimation);
 	return progressAnimation;
 }
@@ -249,13 +249,13 @@ ScalarKeyFrameAnimation Play(const Compositor & compositor, Visual const & visua
 // Scenario 4
 void Scenario4PlayLottieOutput(const Compositor & compositor, const ContainerVisual & root) {
 	//configure a container visual
-	float width = 500.0f, height = 300.0f;
+	float width = 400.0f, height = 400.0f;
 	SpriteVisual container = compositor.CreateSpriteVisual();
 	container.Size({ width, height });
-	container.Offset({ 0.0f, 300.0f, 1.0f });
+	container.Offset({ 0.0f, 350.0f, 1.0f });
 	root.Children().InsertAtTop(container);
 
-	AnimatedVisuals::Body_movin bmv;
+	static AnimatedVisuals::LottieLogo1 bmv;
 
 	//NOTE to make this scenario compile with prerelease Microsoft.UI.Xaml package 190131001 you need to edit: …\UWPCompositionDemos\HelloVectors\packages\Microsoft.UI.Xaml.2.1.190131001-prerelease\build\native\Microsoft.UI.Xaml.targets
 	//and change <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'UAP'"> with <ItemGroup>
