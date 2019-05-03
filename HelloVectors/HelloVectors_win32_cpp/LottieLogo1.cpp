@@ -21,7 +21,7 @@ using namespace Microsoft::UI::Xaml::Controls;
 
 namespace
 {
-struct GeoSource final : implements<GeoSource,
+struct GeoSource : implements<GeoSource,
 	Windows::Graphics::IGeometrySource2D,
 	ABI::Windows::Graphics::IGeometrySource2DInterop>
 {
@@ -1713,7 +1713,8 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
 
     CanvasGeometry Geometry_00()
     {
-        CanvasGeometry result;
+		//Note that CanvasGeometry is defined as follows: typedef com_ptr<GeoSource> CanvasGeometry;
+        //
         com_ptr<ID2D1PathGeometry> path;
         check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
         com_ptr<ID2D1GeometrySink> sink;
@@ -1722,13 +1723,14 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
         sink->AddLine({ 75.663002F, 0.289999992F });
         sink->EndFigure(D2D1_FIGURE_END_OPEN);
         check_hresult(sink->Close());
-        result.attach(new GeoSource(path));
-        return result;
+		
+        //result.attach(new GeoSource(path));
+        //return result;
+		return winrt::make_self<GeoSource>(path);
     }
 
     CanvasGeometry Geometry_01()
     {
-        CanvasGeometry result;
         com_ptr<ID2D1PathGeometry> path;
         check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
         com_ptr<ID2D1GeometrySink> sink;
@@ -1737,13 +1739,12 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
         sink->AddLine({ -4.35900021F, 70.3919983F });
         sink->EndFigure(D2D1_FIGURE_END_OPEN);
         check_hresult(sink->Close());
-        result.attach(new GeoSource(path));
-        return result;
+
+		return winrt::make_self<GeoSource>(path);
     }
 
     CanvasGeometry Geometry_02()
     {
-        CanvasGeometry result;
         com_ptr<ID2D1PathGeometry> path;
         check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
         com_ptr<ID2D1GeometrySink> sink;
@@ -1752,13 +1753,11 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
         sink->AddLine({ 99.1709976F, 0.0659999996F });
         sink->EndFigure(D2D1_FIGURE_END_OPEN);
         check_hresult(sink->Close());
-        result.attach(new GeoSource(path));
-        return result;
+		return winrt::make_self<GeoSource>(path);
     }
 
     CanvasGeometry Geometry_03()
     {
-        CanvasGeometry result;
         com_ptr<ID2D1PathGeometry> path;
         check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
         com_ptr<ID2D1GeometrySink> sink;
@@ -1767,13 +1766,11 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
         sink->AddLine({ 62.1629982F, 0.289999992F });
         sink->EndFigure(D2D1_FIGURE_END_OPEN);
         check_hresult(sink->Close());
-        result.attach(new GeoSource(path));
-        return result;
+		return winrt::make_self<GeoSource>(path);
     }
 
     CanvasGeometry Geometry_04()
     {
-        CanvasGeometry result;
         com_ptr<ID2D1PathGeometry> path;
         check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
         com_ptr<ID2D1GeometrySink> sink;
@@ -1786,13 +1783,11 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
         sink->AddBezier({ { -13.1960001F, -27.0459995F }, { 8.96000004F, 11.559F }, { 49.5060005F, 11.559F } });
         sink->EndFigure(D2D1_FIGURE_END_OPEN);
         check_hresult(sink->Close());
-        result.attach(new GeoSource(path));
-        return result;
+		return winrt::make_self<GeoSource>(path);
     }
 
     CanvasGeometry Geometry_05()
     {
-        CanvasGeometry result;
         com_ptr<ID2D1PathGeometry> path;
         check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
         com_ptr<ID2D1GeometrySink> sink;
@@ -1801,13 +1796,12 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
         sink->AddLine({ 340.955994F, 213.628006F });
         sink->EndFigure(D2D1_FIGURE_END_OPEN);
         check_hresult(sink->Close());
-        result.attach(new GeoSource(path));
-        return result;
+		return winrt::make_self<GeoSource>(path);
     }
 
     CanvasGeometry Geometry_06()
     {
-        CanvasGeometry result;
+        
         com_ptr<ID2D1PathGeometry> path;
         check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
         com_ptr<ID2D1GeometrySink> sink;
@@ -1816,13 +1810,12 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
         sink->AddLine({ -1.68099999F, 29.9920006F });
         sink->EndFigure(D2D1_FIGURE_END_OPEN);
         check_hresult(sink->Close());
-        result.attach(new GeoSource(path));
-        return result;
+		return winrt::make_self<GeoSource>(path);
     }
 
     CanvasGeometry Geometry_07()
     {
-        CanvasGeometry result;
+        
         com_ptr<ID2D1PathGeometry> path;
         check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
         com_ptr<ID2D1GeometrySink> sink;
@@ -1831,13 +1824,12 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
         sink->AddLine({ -1.76800001F, 25.9659996F });
         sink->EndFigure(D2D1_FIGURE_END_OPEN);
         check_hresult(sink->Close());
-        result.attach(new GeoSource(path));
-        return result;
+		return winrt::make_self<GeoSource>(path);
     }
 
     CanvasGeometry Geometry_08()
     {
-        CanvasGeometry result;
+        
         com_ptr<ID2D1PathGeometry> path;
         check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
         com_ptr<ID2D1GeometrySink> sink;
@@ -1851,13 +1843,12 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
         sink->AddBezier({ { 53.6889992F, 43.6080017F }, { 68.9710007F, 41.3569984F }, { 140.393997F, 43.6720009F } });
         sink->EndFigure(D2D1_FIGURE_END_OPEN);
         check_hresult(sink->Close());
-        result.attach(new GeoSource(path));
-        return result;
+		return winrt::make_self<GeoSource>(path);
     }
 
     CanvasGeometry Geometry_09()
     {
-        CanvasGeometry result;
+        
         com_ptr<ID2D1PathGeometry> path;
         check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
         com_ptr<ID2D1GeometrySink> sink;
@@ -1867,13 +1858,12 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
         sink->AddBezier({ { -78.625F, -72 }, { -79.375F, -58.25F }, { -80.375F, -39.25F } });
         sink->EndFigure(D2D1_FIGURE_END_OPEN);
         check_hresult(sink->Close());
-        result.attach(new GeoSource(path));
-        return result;
+		return winrt::make_self<GeoSource>(path);
     }
 
     CanvasGeometry Geometry_10()
     {
-        CanvasGeometry result;
+        
         com_ptr<ID2D1PathGeometry> path;
         check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
         com_ptr<ID2D1GeometrySink> sink;
@@ -1883,13 +1873,12 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
         sink->AddBezier({ { -75.5F, -66.25F }, { -75.5F, -56.75F }, { -76.5F, -37.75F } });
         sink->EndFigure(D2D1_FIGURE_END_OPEN);
         check_hresult(sink->Close());
-        result.attach(new GeoSource(path));
-        return result;
+		return winrt::make_self<GeoSource>(path);
     }
 
     CanvasGeometry Geometry_11()
     {
-        CanvasGeometry result;
+        
         com_ptr<ID2D1PathGeometry> path;
         check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
         com_ptr<ID2D1GeometrySink> sink;
@@ -1899,13 +1888,12 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
         sink->AddBezier({ { -61.4720001F, -34.3689995F }, { -62.25F, -5.75F }, { -62.25F, -5.75F } });
         sink->EndFigure(D2D1_FIGURE_END_OPEN);
         check_hresult(sink->Close());
-        result.attach(new GeoSource(path));
-        return result;
+		return winrt::make_self<GeoSource>(path);
     }
 
     CanvasGeometry Geometry_12()
     {
-        CanvasGeometry result;
+        
         com_ptr<ID2D1PathGeometry> path;
         check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
         com_ptr<ID2D1GeometrySink> sink;
@@ -1916,13 +1904,12 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
         sink->AddBezier({ { -53.5F, -20.5790005F }, { -42.25F, 4.25F }, { -42.25F, 4.25F } });
         sink->EndFigure(D2D1_FIGURE_END_OPEN);
         check_hresult(sink->Close());
-        result.attach(new GeoSource(path));
-        return result;
+		return winrt::make_self<GeoSource>(path);
     }
 
     CanvasGeometry Geometry_13()
     {
-        CanvasGeometry result;
+        
         com_ptr<ID2D1PathGeometry> path;
         check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
         com_ptr<ID2D1GeometrySink> sink;
@@ -1931,13 +1918,12 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
         sink->AddLine({ -32.769001F, 57.3650017F });
         sink->EndFigure(D2D1_FIGURE_END_OPEN);
         check_hresult(sink->Close());
-        result.attach(new GeoSource(path));
-        return result;
+		return winrt::make_self<GeoSource>(path);
     }
 
     CanvasGeometry Geometry_14()
     {
-        CanvasGeometry result;
+        
         com_ptr<ID2D1PathGeometry> path;
         check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
         com_ptr<ID2D1GeometrySink> sink;
@@ -1946,13 +1932,12 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
         sink->AddLine({ -32.75F, 55.75F });
         sink->EndFigure(D2D1_FIGURE_END_OPEN);
         check_hresult(sink->Close());
-        result.attach(new GeoSource(path));
-        return result;
+		return winrt::make_self<GeoSource>(path);
     }
 
     CanvasGeometry Geometry_15()
     {
-        CanvasGeometry result;
+        
         com_ptr<ID2D1PathGeometry> path;
         check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
         com_ptr<ID2D1GeometrySink> sink;
@@ -1961,13 +1946,12 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
         sink->AddLine({ -48.769001F, 55.3650017F });
         sink->EndFigure(D2D1_FIGURE_END_OPEN);
         check_hresult(sink->Close());
-        result.attach(new GeoSource(path));
-        return result;
+		return winrt::make_self<GeoSource>(path);
     }
 
     CanvasGeometry Geometry_16()
     {
-        CanvasGeometry result;
+        
         com_ptr<ID2D1PathGeometry> path;
         check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
         com_ptr<ID2D1GeometrySink> sink;
@@ -1976,13 +1960,12 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
         sink->AddLine({ -48.75F, 54.75F });
         sink->EndFigure(D2D1_FIGURE_END_OPEN);
         check_hresult(sink->Close());
-        result.attach(new GeoSource(path));
-        return result;
+		return winrt::make_self<GeoSource>(path);
     }
 
     CanvasGeometry Geometry_17()
     {
-        CanvasGeometry result;
+        
         com_ptr<ID2D1PathGeometry> path;
         check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
         com_ptr<ID2D1GeometrySink> sink;
@@ -1991,13 +1974,12 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
         sink->AddLine({ 136.731003F, 7.11499977F });
         sink->EndFigure(D2D1_FIGURE_END_OPEN);
         check_hresult(sink->Close());
-        result.attach(new GeoSource(path));
-        return result;
+		return winrt::make_self<GeoSource>(path);
     }
 
     CanvasGeometry Geometry_18()
     {
-        CanvasGeometry result;
+        
         com_ptr<ID2D1PathGeometry> path;
         check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
         com_ptr<ID2D1GeometrySink> sink;
@@ -2006,13 +1988,12 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
         sink->AddLine({ 132, 2.75F });
         sink->EndFigure(D2D1_FIGURE_END_OPEN);
         check_hresult(sink->Close());
-        result.attach(new GeoSource(path));
-        return result;
+		return winrt::make_self<GeoSource>(path);
     }
 
     CanvasGeometry Geometry_19()
     {
-        CanvasGeometry result;
+        
         com_ptr<ID2D1PathGeometry> path;
         check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
         com_ptr<ID2D1GeometrySink> sink;
@@ -2021,13 +2002,12 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
         sink->AddLine({ 137.481003F, 11.3649998F });
         sink->EndFigure(D2D1_FIGURE_END_OPEN);
         check_hresult(sink->Close());
-        result.attach(new GeoSource(path));
-        return result;
+		return winrt::make_self<GeoSource>(path);
     }
 
     CanvasGeometry Geometry_20()
     {
-        CanvasGeometry result;
+        
         com_ptr<ID2D1PathGeometry> path;
         check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
         com_ptr<ID2D1GeometrySink> sink;
@@ -2036,13 +2016,12 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
         sink->AddLine({ 82.75F, -44.75F });
         sink->EndFigure(D2D1_FIGURE_END_OPEN);
         check_hresult(sink->Close());
-        result.attach(new GeoSource(path));
-        return result;
+		return winrt::make_self<GeoSource>(path);
     }
 
     CanvasGeometry Geometry_21()
     {
-        CanvasGeometry result;
+        
         com_ptr<ID2D1PathGeometry> path;
         check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
         com_ptr<ID2D1GeometrySink> sink;
@@ -2051,13 +2030,12 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
         sink->AddLine({ 63.5F, -20.5F });
         sink->EndFigure(D2D1_FIGURE_END_OPEN);
         check_hresult(sink->Close());
-        result.attach(new GeoSource(path));
-        return result;
+		return winrt::make_self<GeoSource>(path);
     }
 
     CanvasGeometry Geometry_22()
     {
-        CanvasGeometry result;
+        
         com_ptr<ID2D1PathGeometry> path;
         check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
         com_ptr<ID2D1GeometrySink> sink;
@@ -2066,13 +2044,12 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
         sink->AddLine({ 78.25F, 3.5F });
         sink->EndFigure(D2D1_FIGURE_END_OPEN);
         check_hresult(sink->Close());
-        result.attach(new GeoSource(path));
-        return result;
+		return winrt::make_self<GeoSource>(path);
     }
 
     CanvasGeometry Geometry_23()
     {
-        CanvasGeometry result;
+        
         com_ptr<ID2D1PathGeometry> path;
         check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
         com_ptr<ID2D1GeometrySink> sink;
@@ -2081,13 +2058,12 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
         sink->AddLine({ 136.647995F, 10.1560001F });
         sink->EndFigure(D2D1_FIGURE_END_OPEN);
         check_hresult(sink->Close());
-        result.attach(new GeoSource(path));
-        return result;
+		return winrt::make_self<GeoSource>(path);
     }
 
     CanvasGeometry Geometry_24()
     {
-        CanvasGeometry result;
+        
         com_ptr<ID2D1PathGeometry> path;
         check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
         com_ptr<ID2D1GeometrySink> sink;
@@ -2096,13 +2072,12 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
         sink->AddLine({ 132.274994F, 4.73099995F });
         sink->EndFigure(D2D1_FIGURE_END_OPEN);
         check_hresult(sink->Close());
-        result.attach(new GeoSource(path));
-        return result;
+		return winrt::make_self<GeoSource>(path);
     }
 
     CanvasGeometry Geometry_25()
     {
-        CanvasGeometry result;
+        
         com_ptr<ID2D1PathGeometry> path;
         check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
         com_ptr<ID2D1GeometrySink> sink;
@@ -2111,13 +2086,12 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
         sink->AddLine({ 134.921997F, 14.7489996F });
         sink->EndFigure(D2D1_FIGURE_END_OPEN);
         check_hresult(sink->Close());
-        result.attach(new GeoSource(path));
-        return result;
+		return winrt::make_self<GeoSource>(path);
     }
 
     CanvasGeometry Geometry_26()
     {
-        CanvasGeometry result;
+        
         com_ptr<ID2D1PathGeometry> path;
         check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
         com_ptr<ID2D1GeometrySink> sink;
@@ -2126,13 +2100,12 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
         sink->AddLine({ 133.195007F, 13.21F });
         sink->EndFigure(D2D1_FIGURE_END_OPEN);
         check_hresult(sink->Close());
-        result.attach(new GeoSource(path));
-        return result;
+		return winrt::make_self<GeoSource>(path);
     }
 
     CanvasGeometry Geometry_27()
     {
-        CanvasGeometry result;
+        
         com_ptr<ID2D1PathGeometry> path;
         check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
         com_ptr<ID2D1GeometrySink> sink;
@@ -2141,13 +2114,11 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
         sink->AddLine({ 130.029007F, 5.01599979F });
         sink->EndFigure(D2D1_FIGURE_END_OPEN);
         check_hresult(sink->Close());
-        result.attach(new GeoSource(path));
-        return result;
+		return winrt::make_self<GeoSource>(path);
     }
 
     CanvasGeometry Geometry_28()
     {
-        CanvasGeometry result;
         com_ptr<ID2D1PathGeometry> path;
         check_hresult(_d2dFactory->CreatePathGeometry(path.put()));
         com_ptr<ID2D1GeometrySink> sink;
@@ -2156,8 +2127,7 @@ struct AnimatedVisual : implements<AnimatedVisual,IAnimatedVisual>
         sink->AddLine({ 131.281998F, 21.8069992F });
         sink->EndFigure(D2D1_FIGURE_END_OPEN);
         check_hresult(sink->Close());
-        result.attach(new GeoSource(path));
-        return result;
+		return winrt::make_self<GeoSource>(path);
     }
 
     StepEasingFunction HoldThenStepEasingFunction()
