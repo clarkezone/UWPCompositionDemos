@@ -86,7 +86,6 @@ void Scenario2SimplePath(const Compositor & compositor, const ContainerVisual & 
 	com_ptr<ID2D1Factory> d2dFactory;
 	check_hresult(D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, d2dFactory.put()));
 
-	com_ptr<GeoSource> result;
 	com_ptr<ID2D1PathGeometry> path;
 
 	// use D2D factory to create a path geometry
@@ -107,8 +106,7 @@ void Scenario2SimplePath(const Compositor & compositor, const ContainerVisual & 
 	check_hresult(sink->Close());
 
 	// Create a GeoSource helper object wrapping the path
-	result = winrt::make_self<GeoSource>(path);
-	CompositionPath trianglePath = CompositionPath(result.as<Windows::Graphics::IGeometrySource2D>());
+	CompositionPath trianglePath = CompositionPath(winrt::make<GeoSource>(path).as<Windows::Graphics::IGeometrySource2D>());
 
 	// create a CompositionPathGeometry from the composition path
 	CompositionPathGeometry compositionPathGeometry = compositor.CreatePathGeometry(trianglePath);
@@ -134,7 +132,6 @@ void Scenario2SimplePath(const Compositor & compositor, const ContainerVisual & 
 CompositionPath BuildPath(com_ptr<ID2D1Factory> const & d2dFactory, std::function<void(com_ptr<ID2D1GeometrySink> const & sink)> builder)
 {
 	// See scenario 2 for a more detailed explanation of the items here
-	com_ptr<GeoSource> result;
 	com_ptr<ID2D1PathGeometry> path;
 	check_hresult(d2dFactory->CreatePathGeometry(path.put()));
 	com_ptr<ID2D1GeometrySink> sink;
@@ -145,8 +142,7 @@ CompositionPath BuildPath(com_ptr<ID2D1Factory> const & d2dFactory, std::functio
 
 	check_hresult(sink->Close());
 
-	result = winrt::make_self<GeoSource>(path);
-	CompositionPath trianglePath = CompositionPath(result.as<Windows::Graphics::IGeometrySource2D>());
+	CompositionPath trianglePath = CompositionPath(winrt::make<GeoSource>(path).as<Windows::Graphics::IGeometrySource2D>());
 	return trianglePath;
 }
 
