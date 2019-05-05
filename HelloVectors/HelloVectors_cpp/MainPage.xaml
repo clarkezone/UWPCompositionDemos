@@ -1,0 +1,22 @@
+﻿<Page
+    x:Class="HelloVectors_cpp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HelloVectors_cpp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+  <Grid>
+        <StackPanel>
+            <Button Click="SimpleShapeImperative_Click">Simple Shape Imperative</Button>
+            <Button Click="SimplePathImperative_Click">Simple Path Imperative</Button>
+            <Button Click="PathMorphImperative_Click">Path Morph Imperative</Button>
+            <Button Click="BodyMovinImperative_Click">Animation from After Effects using raw Visual Layer</Button>
+            <Button Click="BodyMovinImperativeAnimationPlayer_Click">Animation from After Effects using Microsoft.UI.Xaml.Controls.AnimatedVisualPlayer</Button>
+        </StackPanel>
+        <Grid
+            x:Name="VectorHost" Margin="234,300,193,119"
+            />
+    </Grid>
+</Page>
