@@ -8,6 +8,6 @@ Our official team sample repo is here: https://github.com/Microsoft/WindowsCompo
 
 Recently added some examples of Vector Graphics which you can read about in [this blogpost](https://clarkezone.github.io/blogging/wuc/2019/05/05/animated-vector-graphics-using-windows_ui_composition.html)
 
-![VectorGraphics](https://clarkezone.github.io/static/img/vectors/Vectors_in_Win32.gif)
+![VectorGraphics](Images/Vectors_in_Win32.gif)
 
 There are also some more C++ demos in my fork of Kenny's cppwinrt demo project here: https://github.com/clarkezone/cppwinrt 
