@@ -1,5 +1,6 @@
 #pragma once
 #include "pch.h"
+#include <functional>
 extern "C" IMAGE_DOS_HEADER __ImageBase;
 
 using namespace winrt;
